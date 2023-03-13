@@ -1,0 +1,12 @@
+.header__logo-link {
+  display: block;
+
+  text-decoration: none;
+  color: #fff;
+  cursor: pointer;
+  transition: 600ms;
+}
+
+.header__logo-link:hover {
+  opacity: .8;
+}

@@ -1,0 +1,37 @@
+.page {
+  min-width: 320px;
+  max-width: 1280px;
+  min-height: 100vh;
+  margin: 0 auto;
+
+  display: grid;
+  grid-template-rows: max-content 1fr max-content;
+  grid-template-columns: 200px 1fr 200px;
+  grid-template-areas:
+    ". header ."
+    ". content ."
+    ". footer .";
+  justify-items: center;
+
+  /* Корневые стили страницы */
+  background-color: #000;
+  font-family: 'Inter', 'Arial', sans-serif;
+  color: #fff;
+  line-height: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+  -moz-text-size-adjust: 100%;
+}
+
+@media screen and (max-width: 425px) {
+  .page {
+    grid-template-columns: 19px 1fr 19px;
+  }
+}
+
+
+* {
+  outline: 1px solid yellowgreen;
+}
