@@ -7,6 +7,14 @@
 @import url(../blocks/header/__logo-link/header__logo-link.css);
 @import url(../blocks/header/__logo/header__logo.css);
 
+@import url(../blocks/cards/cards.css);
+@import url(../blocks/cards/__list/cards__list.css);
+
+@import url(../blocks/card/card.css);
+@import url(../blocks/card/__image/card__image.css);
+@import url(../blocks/card/__description/card__description.css);
+@import url(../blocks/card/__like-heart/card__like-heart.css);
+
 @import url(../blocks/content/content.css);
 
 @import url(../blocks/footer/footer.css);

@@ -1,0 +1,26 @@
+.card__like-heart {
+  grid-area: like-heart;
+  
+  align-self: center;
+  width: 22px;
+  height: 19px;
+  margin: 0 20px;
+
+  background-image: url(../../../images/heart-empty.png);
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
+  background-clip: content-box;
+  aspect-ratio: 1/1;
+
+  cursor: pointer;
+  transition: 600ms;
+}
+
+.card__like-heart:active {
+  background-image: url(../../../images/heart-full.png);
+}
+
+.card__like-heart:hover {
+  opacity: .5;
+}
