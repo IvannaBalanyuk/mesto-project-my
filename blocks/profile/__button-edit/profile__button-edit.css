@@ -1,0 +1,18 @@
+.profile__button-edit {
+  grid-area: button-edit;
+  justify-self: center;
+  align-self: flex-end;
+  margin-bottom: 8.5px;
+}
+
+@media screen and (max-width: 1024px) {
+  .profile__button-edit {
+    margin-bottom: 5.5px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .profile__button-edit {
+    margin-bottom: 5.5px;
+  }
+}

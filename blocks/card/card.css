@@ -10,5 +10,5 @@
   grid-template-rows: max-content 79px;
   grid-template-areas:
   "image image"
-  "description like-heart";
+  "description button-like";
 }

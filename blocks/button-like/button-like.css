@@ -1,0 +1,21 @@
+.button-like {
+  width: 22px;
+  height: 19px;
+
+  background-image: url(../../images/heart.svg);
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
+  aspect-ratio: 1/1;
+
+  cursor: pointer;
+  transition: 600ms;
+}
+
+.button-like:active {
+  background-image: url(../../images/heart_active.svg);
+}
+
+.button-like:hover {
+  opacity: .5;
+}

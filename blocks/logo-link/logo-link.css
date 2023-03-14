@@ -1,0 +1,15 @@
+.logo-link {
+  text-decoration: none;
+
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
+  aspect-ratio: 1/1;
+
+  cursor: pointer;
+  transition: 600ms;
+}
+
+.logo-link:hover {
+  opacity: .6;
+}

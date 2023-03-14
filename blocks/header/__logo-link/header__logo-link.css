@@ -1,12 +1,11 @@
 .header__logo-link {
-  display: block;
-
-  text-decoration: none;
-  color: #fff;
-  cursor: pointer;
-  transition: 600ms;
+  width: 142px;
+  height: 33px;
 }
 
-.header__logo-link:hover {
-  opacity: .8;
+@media screen and (max-width: 425px) {
+  .header__logo-link {
+  width: 104px;
+  height: 25px;
+  }
 }

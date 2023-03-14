@@ -25,13 +25,13 @@
   -moz-text-size-adjust: 100%;
 }
 
-@media screen and (max-width: 1024px) {
+@media screen and (max-width: 1279px) {
   .page {
     grid-template-columns: 100px 1fr 100px;
   }
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 1024px) {
   .page {
     grid-template-columns: 50px 1fr 50px;
   }

@@ -2,7 +2,7 @@
   grid-area: header;
 
   width: 100%;
-  padding: 45px 45px 41px 0;
+  padding: 45px 0 41px;
   border-bottom: 1px solid #54545470;
   box-sizing: border-box;
 
@@ -11,6 +11,6 @@
 
 @media screen and (max-width: 425px) {
   .header {
-    padding: 28px 28px 32px 8px;
+    padding: 28px 8px 32px;
   }
 }
