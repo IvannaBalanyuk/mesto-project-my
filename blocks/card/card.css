@@ -1,0 +1,14 @@
+.card {
+  width: 100%;
+
+  background-color: #fff;
+  border-radius: 10px;
+  overflow: hidden;
+
+  display: grid;
+  grid-template-columns: 1fr 62px;
+  grid-template-rows: max-content 79px;
+  grid-template-areas:
+  "image image"
+  "description button-like";
+}

@@ -1,0 +1,11 @@
+.card__image {
+  grid-area: image;
+
+  display: block;
+  width: 100%;
+  min-width: 282px;
+
+  object-fit: cover;
+  object-position: center;
+  aspect-ratio: 1/1;
+}

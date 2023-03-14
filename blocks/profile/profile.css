@@ -1,0 +1,27 @@
+.profile {
+  width: 100%;
+  padding: 40px 0 51px;
+
+  display: grid;
+  grid-template-rows: min-content;
+  grid-template-columns: repeat(2, max-content) 60px 1fr;
+  grid-template-areas:
+    "avatar info . button-add";
+  align-items: center;
+}
+
+@media screen and (max-width: 768px) {
+  .profile {
+    padding: 42px 0 36px;
+
+    grid-template-rows: repeat(3, min-content);
+    grid-template-columns: max-content;
+    grid-template-areas:
+      "avatar"
+      "info"
+      "button-add";
+    justify-content: center;
+    justify-items: center;
+    row-gap: 26px;
+  }
+}

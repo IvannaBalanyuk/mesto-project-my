@@ -1,0 +1,6 @@
+.card__button-like {
+  grid-area: button-like;
+  align-self: center;
+
+  margin: 0 20px;
+}
