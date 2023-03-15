@@ -13,34 +13,14 @@
   <title>Место</title>
 </head>
 
-<!-- Добавь меня в классы page для блокировки прокрутки окна при открытом popup: -->
+<!-- Класс для блокировки прокрутки окна при открытом popup -->
 <!-- page_non-scroll -->
-<body class="page page_non-scroll">
-
+<body class="page">
   <header class="header">
     <a class="header__logo-link logo-link logo-link_theme_dark" href="#content" target="_parent"></a>
   </header>
 
   <main class="content" id="content">
-    <!-- Добавь меня в классы popup для открытия модального окна: -->
-    <!-- popup_opened -->
-    <section class="popup popup_opened" aria-label="Модальное окно редактирования профиля">
-      <div class="popup__container">
-        <h2 class="popup__title">Редактировать профиль</h2>
-        <button class="button-close popup__button-close"></button>
-        <form class="form popup__form" action="#">
-          <fieldset class="form__input-container">
-            <input class="form__input-item" type="text" value="Жак-Ив Кусто">
-            <input class="form__input-item" type="text" value="Исследователь океана">
-          </fieldset>
-
-          <fieldset class="form__handlers">
-            <button class="button-save form__button-save" type="submit" aria-label="Сохранить изменения">Сохранить</button>
-          </fieldset>
-        </form>
-      </div>
-    </section>
-
     <!-- Секция profile -->
     <section class="profile" aria-label="Профиль пользователя сайта">
       <img class="profile__avatar" src="./images/avatar.jpg" alt="Аватар профиля">
@@ -53,41 +33,41 @@
     </section>
 
     <!-- Секция cards -->
-    <section class="cards" aria-label="Галерея размещенных пользователем фотографий">
+    <section class="cards" aria-label="Галерея фотографий">
       <ul class="cards__list">
         <li class="card">
-          <img class="card__image" src="./images/baikal.jpg" alt="Фотография к карточке">
+          <img class="card__image" src="./images/baikal.jpg" alt="Фотография">
           <h2 class="card__description">Байкал</h2>
           <button class="card__button-like button-like" type="button" aria-label="Поставить лайк"></button>
         </li>
 
         <li class="card">
-          <img class="card__image" src="./images/el'brus.jpg" alt="Фотография к карточке">
+          <img class="card__image" src="./images/el'brus.jpg" alt="Фотография">
           <h2 class="card__description">Эльбрус</h2>
           <button class="card__button-like button-like" type="button" aria-label="Поставить лайк"></button>
         </li>
 
         <li class="card">
-          <img class="card__image" src="./images/karelia.jpg" alt="Фотография к карточке">
+          <img class="card__image" src="./images/karelia.jpg" alt="Фотография">
           <h2 class="card__description">Карелия</h2>
           <button class="card__button-like button-like" type="button" aria-label="Поставить лайк"></button>
         </li>
 
         <li class="card">
-          <img class="card__image" src="./images/hrebet-nurali.jpg" alt="Фотография к карточке">
+          <img class="card__image" src="./images/hrebet-nurali.jpg" alt="Фотография">
           <h2 class="card__description">Хребет Нурали</h2>
           <button class="card__button-like button-like" type="button" aria-label="Поставить лайк"></button>
         </li>
 
         <li class="card">
-          <img class="card__image" src="./images/aniva.jpg" alt="Фотография к карточке">
+          <img class="card__image" src="./images/aniva.jpg" alt="Фотография">
           div.
           <h2 class="card__description">Залив Анива</h2>
           <button class="card__button-like button-like" type="button" aria-label="Поставить лайк"></button>
         </li>
 
         <li class="card">
-          <img class="card__image" src="./images/dagestan.jpg" alt="Фотография к карточке">
+          <img class="card__image" src="./images/dagestan.jpg" alt="Фотография">
           <h2 class="card__description">Дагестан</h2>
           <button class="card__button-like button-like" type="button" aria-label="Поставить лайк"></button>
         </li>
@@ -98,5 +78,24 @@
   <footer class="footer">
     <p class="footer__copyright" lang="en">&COPY; 2023 Mesto Russia</p>
   </footer>
+
+  <!-- Класс для открытия модального окна -->
+  <!-- popup_opened -->
+  <section class="popup" aria-label="Модальное окно редактирования профиля">
+    <div class="popup__container">
+      <h2 class="popup__title">Редактировать профиль</h2>
+      <button class="button-close popup__button-close"></button>
+      <form class="form popup__form" action="#">
+        <fieldset class="form__input-container">
+          <input class="form__input-item" type="text" value="Жак-Ив Кусто" placeholder="Имя">
+          <input class="form__input-item" type="text" value="Исследователь океана" placeholder="О себе">
+        </fieldset>
+
+        <fieldset class="form__handlers">
+          <button class="button-save form__button-save" type="submit" aria-label="Сохранить изменения">Сохранить</button>
+        </fieldset>
+      </form>
+    </div>
+  </section>
 </body>
 </html>

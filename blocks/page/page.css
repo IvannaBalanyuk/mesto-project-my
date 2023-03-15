@@ -50,8 +50,3 @@
     grid-template-columns: 19px 1fr 19px;
   }
 }
-
-
-* {
-  outline: 1px solid yellowgreen;
-}
