@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -81,19 +81,16 @@
 
   <!-- Класс для открытия модального окна -->
   <!-- popup_opened -->
-  <section class="popup" aria-label="Модальное окно редактирования профиля">
+  <section class="popup popup_opened" aria-label="Модальное окно редактирования профиля">
     <div class="popup__container">
       <h2 class="popup__title">Редактировать профиль</h2>
       <button class="button-close popup__button-close"></button>
-      <form class="form popup__form" action="#">
+      <form class="form popup__form" action="#" name="form-edit-profile">
         <fieldset class="form__input-container">
-          <input class="form__input-item" type="text" value="Жак-Ив Кусто" placeholder="Имя">
-          <input class="form__input-item" type="text" value="Исследователь океана" placeholder="О себе">
+          <input class="form__input-item" type="text" value="Жак-Ив Кусто" placeholder="Имя" name="user-name">
+          <input class="form__input-item" type="text" value="Исследователь океана" placeholder="О себе" name="user-about">
         </fieldset>
-
-        <fieldset class="form__handlers">
-          <button class="button-save form__button-save" type="submit" aria-label="Сохранить изменения">Сохранить</button>
-        </fieldset>
+        <button class="button-save form__button-save" type="submit" aria-label="Сохранить изменения">Сохранить</button>
       </form>
     </div>
   </section>
