@@ -22,3 +22,10 @@
 .button-save:hover {
   opacity: .8;
 }
+
+@media screen and (max-width: 768px) {
+  .button-save {
+    font-size: 14px;
+    line-height: 17px;
+  }
+}
