@@ -6,3 +6,9 @@
 
   display: flex;
 }
+
+@media screen and (max-width: 425px) {
+  .footer {
+    padding: 45px 0 36px;
+  }
+}
