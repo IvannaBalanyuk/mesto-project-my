@@ -1,0 +1,13 @@
+.form__input-container {
+  /* Сброс стилей тега */
+  margin: 0;
+  padding: 0;
+  border: 0;
+
+  /* Стили класса */
+  width: 100%;
+
+  display: flex;
+  flex-direction: column;
+  row-gap: 30px;
+}

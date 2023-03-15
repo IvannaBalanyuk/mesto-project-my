@@ -15,7 +15,7 @@
   overflow: hidden;
 }
 
-@media screen and (max-width: 1024px) {
+@media screen and (max-width: 1080px) {
   .profile__user-name {
     min-width: 232px;
     max-width: 332px;

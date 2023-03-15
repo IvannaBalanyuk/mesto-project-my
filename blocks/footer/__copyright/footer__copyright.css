@@ -1,6 +1,8 @@
 .footer__copyright {
+  /* Сброс стилей тега */
   margin: 0;
 
+  /* Стили класса */
   font-size: 18px;
   line-height: 22px;
   color: #545454;

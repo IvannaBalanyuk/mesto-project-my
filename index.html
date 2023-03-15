@@ -12,63 +12,89 @@
   <link rel="stylesheet" href="./pages/index.css">
   <title>Место</title>
 </head>
-<body class="page">
+
+<!-- Добавь меня в классы page для блокировки прокрутки окна при открытом popup: -->
+<!-- page_non-scroll -->
+<body class="page page_non-scroll">
+
   <header class="header">
     <a class="header__logo-link logo-link logo-link_theme_dark" href="#content" target="_parent"></a>
   </header>
 
   <main class="content" id="content">
-    <section class="profile">
+    <!-- Добавь меня в классы popup для открытия модального окна: -->
+    <!-- popup_opened -->
+    <section class="popup popup_opened" aria-label="Модальное окно редактирования профиля">
+      <div class="popup__container">
+        <h2 class="popup__title">Редактировать профиль</h2>
+        <button class="button-close popup__button-close"></button>
+        <form class="form popup__form" action="#">
+          <fieldset class="form__input-container">
+            <input class="form__input-item" type="text" value="Жак-Ив Кусто">
+            <input class="form__input-item" type="text" value="Исследователь океана">
+          </fieldset>
+
+          <fieldset class="form__handlers">
+            <button class="button-save form__button-save" type="submit" aria-label="Сохранить изменения">Сохранить</button>
+          </fieldset>
+        </form>
+      </div>
+    </section>
+
+    <!-- Секция profile -->
+    <section class="profile" aria-label="Профиль пользователя сайта">
       <img class="profile__avatar" src="./images/avatar.jpg" alt="Аватар профиля">
       <div class="profile__info">
         <h1 class="profile__user-name">Жак-Ив Кусто</h1>
         <p class="profile__user-about">Исследователь океана</p>
-        <div class="button-edit profile__button-edit"></div>
+        <button class="button-edit profile__button-edit" type="button" aria-label="Редактировать профиль"></button>
       </div>
-      <div class="button-add profile__button-add"></div>
+      <button class="button-add profile__button-add" type="button" aria-label="Добавить фотографию"></button>
     </section>
 
-    <section class="cards">
+    <!-- Секция cards -->
+    <section class="cards" aria-label="Галерея размещенных пользователем фотографий">
       <ul class="cards__list">
         <li class="card">
           <img class="card__image" src="./images/baikal.jpg" alt="Фотография к карточке">
           <h2 class="card__description">Байкал</h2>
-          <div class="card__button-like button-like"></div>
+          <button class="card__button-like button-like" type="button" aria-label="Поставить лайк"></button>
         </li>
 
         <li class="card">
           <img class="card__image" src="./images/el'brus.jpg" alt="Фотография к карточке">
           <h2 class="card__description">Эльбрус</h2>
-          <div class="card__button-like button-like"></div>
+          <button class="card__button-like button-like" type="button" aria-label="Поставить лайк"></button>
         </li>
 
         <li class="card">
           <img class="card__image" src="./images/karelia.jpg" alt="Фотография к карточке">
           <h2 class="card__description">Карелия</h2>
-          <div class="card__button-like button-like"></div>
+          <button class="card__button-like button-like" type="button" aria-label="Поставить лайк"></button>
         </li>
 
         <li class="card">
           <img class="card__image" src="./images/hrebet-nurali.jpg" alt="Фотография к карточке">
           <h2 class="card__description">Хребет Нурали</h2>
-          <div class="card__button-like button-like"></div>
+          <button class="card__button-like button-like" type="button" aria-label="Поставить лайк"></button>
         </li>
 
         <li class="card">
           <img class="card__image" src="./images/aniva.jpg" alt="Фотография к карточке">
           div.
           <h2 class="card__description">Залив Анива</h2>
-          <div class="card__button-like button-like"></div>
+          <button class="card__button-like button-like" type="button" aria-label="Поставить лайк"></button>
         </li>
 
         <li class="card">
           <img class="card__image" src="./images/dagestan.jpg" alt="Фотография к карточке">
           <h2 class="card__description">Дагестан</h2>
-          <div class="card__button-like button-like"></div>
+          <button class="card__button-like button-like" type="button" aria-label="Поставить лайк"></button>
         </li>
       </ul>
     </section>
   </main>
+
   <footer class="footer">
     <p class="footer__copyright" lang="en">&COPY; 2023 Mesto Russia</p>
   </footer>

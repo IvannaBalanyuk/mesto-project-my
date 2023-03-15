@@ -1,0 +1,15 @@
+.form__input-item {
+  /* Сброс стилей тега */
+  padding: 0;
+  border: 0;
+  background-color: transparent;
+
+  /* Стили класса */
+  width: 100%;
+  padding-bottom: 13px;
+  box-sizing: border-box;
+  border-bottom: 1px solid #00000020;
+
+  font-size: 14px;
+  line-height: 17px;
+}

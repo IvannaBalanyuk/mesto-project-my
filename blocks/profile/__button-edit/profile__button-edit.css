@@ -5,14 +5,9 @@
   margin-bottom: 8.5px;
 }
 
-@media screen and (max-width: 1024px) {
+@media screen and (max-width: 1080px) {
   .profile__button-edit {
     margin-bottom: 5.5px;
   }
 }
 
-@media screen and (max-width: 768px) {
-  .profile__button-edit {
-    margin-bottom: 5.5px;
-  }
-}

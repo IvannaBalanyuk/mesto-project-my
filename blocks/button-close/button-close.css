@@ -1,0 +1,28 @@
+.button-close {
+  /* Сброс стилей тега */
+  padding: 0;
+  border: none;
+  background: transparent;
+
+  /* Стили класса */
+  width: 32px;
+  aspect-ratio: 1/1;
+
+  background-image: url(../../images/button-close.svg);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+
+  cursor: pointer;
+  transition: 600ms;
+}
+
+.button-close:hover {
+  opacity: .6;
+}
+
+@media screen and (max-width: 768px) {
+  .button-close {
+    width: 20px;
+  }
+}

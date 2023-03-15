@@ -1,7 +1,12 @@
 .button-add {
-  width: max-content;
-  padding-left: 146px;
-  padding-top: 46px;
+  /* Сброс стилей тега */
+  padding: 0;
+  border: none;
+  background: transparent;
+
+  /* Стили класса */
+  width: 150px;
+  height: 50px;
 
   border: 2px solid #fff;
   border-radius: 2px;
@@ -45,6 +50,6 @@
 
 @media screen and (max-width: 768px) {
   .button-add {
-    padding-left: 278px;
+    width: 282px;
   }
 }

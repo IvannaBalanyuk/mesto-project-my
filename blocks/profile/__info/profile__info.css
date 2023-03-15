@@ -15,7 +15,6 @@
   justify-items: start;
 }
 
-
 @media screen and (max-width: 768px) {
   .profile__info {
     padding: 0 11px;

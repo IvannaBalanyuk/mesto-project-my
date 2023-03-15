@@ -1,6 +1,8 @@
 .logo-link {
+  /* Сброс стилей тега */
   text-decoration: none;
 
+  /* Стили класса */
   background-repeat: no-repeat;
   background-size: contain;
   background-position: center;

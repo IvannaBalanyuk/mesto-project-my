@@ -1,4 +1,10 @@
 .button-like {
+  /* Сброс стилей тега */
+  padding: 0;
+  border: none;
+  background: transparent;
+
+  /* Стили класса */
   width: 22px;
   height: 19px;
 
@@ -6,7 +12,6 @@
   background-repeat: no-repeat;
   background-size: contain;
   background-position: center;
-  aspect-ratio: 1/1;
 
   cursor: pointer;
   transition: 600ms;
