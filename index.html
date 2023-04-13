@@ -83,7 +83,7 @@
   <!-- popup_opened -->
   <section class="popup" aria-label="Модальное окно редактирования профиля">
     <div class="popup__container">
-      <h2 class="popup__title">Редактировать профиль</h2>
+      <h2  class="popup__title">Редактировать профиль</h2>
       <button class="button-close popup__button-close"></button>
       <form class="form popup__form" action="#" name="form-edit-profile">
         <fieldset class="form__input-container">
@@ -94,5 +94,20 @@
       </form>
     </div>
   </section>
+
+  <section class="popup" aria-label="Модальное окно добавления карточки места">
+    <div class="popup__container">
+      <h2  class="popup__title">Новое место</h2>
+      <button class="button-close popup__button-close"></button>
+      <form class="form popup__form" action="#" name="form-add-card">
+        <fieldset class="form__input-container">
+          <input class="form__input-item" type="text" placeholder="Название" name="place-name">
+          <input class="form__input-item" type="text" placeholder="Ссылка на картинку" name="image-link">
+        </fieldset>
+        <button class="button-save form__button-save" type="submit" aria-label="Создать карточку">Создать</button>
+      </form>
+    </div>
+  </section>
+
 </body>
 </html>
