@@ -13,8 +13,6 @@
   <title>Место</title>
 </head>
 
-<!-- Класс для блокировки прокрутки окна при открытом popup -->
-<!-- page_non-scroll -->
 <body class="page">
   <header class="header">
     <a class="header__logo-link logo-link logo-link_theme_dark" href="#content" target="_parent"></a>
@@ -48,8 +46,7 @@
     <p class="footer__copyright" lang="en">&COPY; 2023 Mesto Russia</p>
   </footer>
 
-  <!-- Класс для открытия модального окна -->
-  <!-- popup_opened -->
+  <!-- Модальное окно редактирования профиля -->
   <section class="popup popup_type_edit-profile" aria-label="Модальное окно редактирования профиля">
     <div class="popup__container">
       <h2 class="popup__title">Редактировать профиль</h2>
@@ -64,6 +61,7 @@
     </div>
   </section>
 
+  <!-- Модальное окно добавления карточки -->
   <section class="popup popup_type_add-card" aria-label="Модальное окно добавления карточки места">
     <div class="popup__container">
       <h2  class="popup__title">Новое место</h2>
@@ -78,6 +76,16 @@
     </div>
   </section>
 
+  <!-- Модальное окно просмотра картинки -->
+  <section class="popup popup_type_show-image" aria-label="Модальное окно просмотра картинки">
+    <figure class="popup__image-container">
+      <button class="button-close popup__button-close"></button>
+      <img class="popup__image" src="#" alt="Фотография">
+      <figcaption class="popup__image-caption"></figcaption>
+    </figure>
+  </section>
+
+  <!-- Шаблон разметки карточки -->
   <template id="card-template">
     <li class="card">
       <button class="button-delete card__button-delete" type="button" aria-label="Удалить карточку"></button>
@@ -86,7 +94,6 @@
       <button class="button-like card__button-like" type="button" aria-label="Поставить лайк"></button>
     </li>
   </template>
-
 
   <script src="./index.js"></script>
 </body>
