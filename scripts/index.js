@@ -8,16 +8,16 @@
     const editButton = page.querySelector('.button-edit');
     const popupEditProfile = page.querySelector('.popup_type_edit-profile');
     const editProfileForm = page.querySelector('.form_type_edit-profile');
-    const userNameInput = editProfileForm.querySelector('.input__text_type_user-name');
-    const userAboutInput = editProfileForm.querySelector('.input__text_type_user-about');
+    const userNameInput = editProfileForm.querySelector('.input-text_type_user-name');
+    const userAboutInput = editProfileForm.querySelector('.input-text_type_user-about');
 
   // Константы добавления карточек
     const cardTemplate = document.querySelector('#card-template').content;
     const addButton = page.querySelector('.button-add');
     const popupAddCard = page.querySelector('.popup_type_add-card');
     const addCardForm = page.querySelector('.form_type_add-card');
-    const placeNameInput = addCardForm.querySelector('.input__text_type_place-name');
-    const imageLinkInput = addCardForm.querySelector('.input__text_type_image-link');
+    const placeNameInput = addCardForm.querySelector('.input-text_type_place-name');
+    const imageLinkInput = addCardForm.querySelector('.input-text_type_image-link');
 
   // Константы просмотра картинки
     const popupShowImage = page.querySelector('.popup_type_show-image');
