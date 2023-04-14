@@ -12,6 +12,7 @@
     const userAboutInput = editProfileForm.querySelector('.input__text_type_user-about');
 
   // Константы добавления карточек
+    const cardTemplate = document.querySelector('#card-template').content;
     const addButton = page.querySelector('.button-add');
     const popupAddCard = page.querySelector('.popup_type_add-card');
     const addCardForm = page.querySelector('.form_type_add-card');
@@ -114,27 +115,15 @@
       };
     };
 
-  // Получение актуального массива карточек
-    function getCardsArray() {
-      const cardsArray = page.querySelector('.cards__list');
-      return cardsArray;
-    }
-
-  // Добавление карточки в массив карточек
-    function addCard(card) {
-      const actualArray = getCardsArray();
-      actualArray.prepend(card);
-    }
-
   // Создание карточки
     function createCard(placeName, placeImageLink) {
-      const cardTemplate = document.querySelector('#card-template').content;
       const cardElement = cardTemplate.querySelector('.card').cloneNode(true);
 
       const cardPlaceName = cardElement.querySelector('.card__place-name');
       const cardPlaceImage = cardElement.querySelector('.card__place-image');
 
       cardPlaceImage.setAttribute('src', placeImageLink);
+      cardPlaceImage.setAttribute('alt', placeName);
       cardPlaceName.textContent = placeName;
 
       // слушатель событий на кнопку лайка
@@ -144,17 +133,24 @@
       cardElement.querySelector('.button-delete').addEventListener('click', deleteCard);
 
       // слушатель событий на картинку
-      cardElement.querySelector('.card__place-image').addEventListener('click', openPopupShowImage);
+      cardPlaceImage.addEventListener('click', openPopupShowImage);
 
-      addCard(cardElement);
+      return cardElement;
     };
+
+  // Добавление карточки в контейнер с карточками
+    function addCard(placeName, placeImageLink) {
+      const cardElement = createCard(placeName, placeImageLink);
+      const cardsContainer = page.querySelector('.cards__list');
+      cardsContainer.prepend(cardElement);
+    }
 
   // Добавление карточек "из коробки" (при загрузке страницы)
     initialCards.forEach(card => {
       const name = card.name;
       const link = card.link;
 
-      createCard(name, link);
+      addCard(name, link);
     });
 
   // Слушатель событий для кнопки открытия окна добавления карточки
@@ -173,7 +169,7 @@
       if (eventTarget.classList.contains('form_type_add-card')
       && (placeNameInput.value)
       && (imageLinkInput.value)) {
-        createCard(placeNameInput.value, imageLinkInput.value);
+        addCard(placeNameInput.value, imageLinkInput.value);
         closePopup();
       } else {
         console.log('false');
