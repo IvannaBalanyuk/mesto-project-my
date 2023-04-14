@@ -20,6 +20,11 @@
     const placeNameInput = addCardForm.querySelector('.input__text_type_place-name');
     const imageLinkInput = addCardForm.querySelector('.input__text_type_image-link');
 
+  // Константы просмотра картинки
+    const popupShowImage = page.querySelector('.popup_type_show-image');
+    const popupImage = page.querySelector('.popup__image');
+    const popupImageCaption = page.querySelector('.popup__image-caption');
+
   // Массив кнопок закрытия модальных окон
     const closeButtons = page.querySelectorAll('.button-close');
 
@@ -64,6 +69,7 @@
     function closePopup() {
       popupEditProfile.classList.remove('popup_opened');
       popupAddCard.classList.remove('popup_opened');
+      popupShowImage.classList.remove('popup_opened');
       page.classList.remove('page_non-scroll');
     };
 
@@ -97,6 +103,9 @@
 
       // слушатель событий на кнопку удаления карточки
       cardElement.querySelector('.button-delete').addEventListener('click', deleteCard);
+
+      // слушатель событий на картинку
+      cardElement.querySelector('.card__place-image').addEventListener('click', openPopupShowImage);
 
       const cardsContainer = page.querySelector('.cards__list');
       cardsContainer.prepend(cardElement);
@@ -186,3 +195,15 @@
 
   // Слушатель событий для формы редактирования профиля
     editProfileForm.addEventListener('submit', editFormSubmitHandler);
+
+// ФУНКЦИОНАЛЬНОСТЬ ПРОСМОТРА КАРТИНКИ
+
+  // Наполнение модального окна просмотра картинки
+    function openPopupShowImage(evt) {
+      openPopup(popupShowImage);
+      const eventTargetImage = evt.target.getAttribute('src');
+      const eventTargetCaption = evt.target.nextElementSibling.textContent;
+
+      popupImage.setAttribute('src', eventTargetImage);
+      popupImageCaption.textContent = eventTargetCaption;
+    }

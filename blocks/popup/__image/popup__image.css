@@ -1,7 +1,10 @@
 .popup__image {
   display: block;
   width: 100%;
+  max-width: 75vw;
+  max-height: 75vh;
 
-  object-fit: cover;
+  object-fit: contain;
   object-position: center top;
+  overflow: hidden;
 }
