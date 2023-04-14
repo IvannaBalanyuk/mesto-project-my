@@ -94,12 +94,11 @@
   // Создание карточки
     function createCard(placeName, placeImageLink) {
       const cardElement = cardTemplate.querySelector('.card').cloneNode(true);
-
       const cardPlaceName = cardElement.querySelector('.card__place-name');
       const cardPlaceImage = cardElement.querySelector('.card__place-image');
 
-      cardPlaceImage.setAttribute('src', placeImageLink);
-      cardPlaceImage.setAttribute('alt', placeName);
+      cardPlaceImage.src = placeImageLink;
+      cardPlaceImage.alt = placeName;
       cardPlaceName.textContent = placeName;
 
       // слушатель событий на кнопку лайка
