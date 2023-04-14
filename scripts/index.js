@@ -12,6 +12,7 @@
     const userAboutInput = editProfileForm.querySelector('.input-text_type_user-about');
 
   // Константы добавления карточек
+    const cardsContainer = page.querySelector('.cards__list');
     const cardTemplate = document.querySelector('#card-template').content;
     const addButton = page.querySelector('.button-add');
     const popupAddCard = page.querySelector('.popup_type_add-card');
@@ -80,7 +81,7 @@
 
   // Удаление карточки
     function deleteCard(evt) {
-      const targetCard = evt.target.parentElement;
+      const targetCard = evt.target.closest('.card');
       targetCard.remove();
 
       const cards = page.querySelectorAll('.card');
@@ -116,7 +117,6 @@
   // Добавление карточки в контейнер с карточками
     function addCard(placeName, placeImageLink) {
       const cardElement = createCard(placeName, placeImageLink);
-      const cardsContainer = page.querySelector('.cards__list');
       cardsContainer.prepend(cardElement);
     }
 
