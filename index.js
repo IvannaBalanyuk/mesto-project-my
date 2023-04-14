@@ -10,7 +10,6 @@ const userNameInput = editProfileForm.querySelector('.input__text_type_user-name
 const userAboutInput = editProfileForm.querySelector('.input__text_type_user-about');
 
 // Константы добавления карточек мест
-const cards = page.querySelector('.cards__list');
 const placeName = page.querySelector('.input__text_type_place-name');
 const imageLink = page.querySelector('.input__text_type_image-link');
 const addButton = page.querySelector('.button-add');
@@ -70,11 +69,36 @@ function addCard(placeName, placeImageLink) {
   cardPlaceName.textContent = placeName;
 
   // слушатель событий на кнопку лайка
-  cardElement.querySelector('.button-like').addEventListener('click', function(evt) {
-    evt.target.classList.toggle('button-like_active');
-  });
+  cardElement.querySelector('.button-like').addEventListener('click', likeCard);
 
-  cards.prepend (cardElement);
+  // слушатель событий на кнопку удаления карточки
+  cardElement.querySelector('.button-delete').addEventListener('click', deleteCard);
+
+  const cardsContainer = page.querySelector('.cards__list');
+  cardsContainer.prepend(cardElement);
+};
+
+// Добавление/удаление лайка
+function likeCard(evt) {
+  evt.target.classList.toggle('button-like_active');
+};
+
+// Удаление карточки
+function deleteCard(evt) {
+  const eventTargetCard = evt.target.parentElement;
+  eventTargetCard.remove();
+
+  const cards = page.querySelectorAll('.card');
+  console.log(cards.length);
+  if (!cards.length) {
+    renderNoCards();
+  };
+};
+
+// Добавление блока "Нет добавленных карточек" (если список карточек пуст)
+function renderNoCards() {
+  const noCardsElement = page.querySelector('.no-cards');
+  noCardsElement.classList.remove('no-cards_hidden');
 };
 
 // Слушатель событий для кнопки открытия окна добавления карточки
@@ -112,7 +136,7 @@ editButton.addEventListener('click', popup => {
 function editProfile() {
   userName.textContent = userNameInput.value;
   userAbout.textContent = userAboutInput.value;
-}
+};
 
 // Обработчик "отправки" формы
 // (общий для редактирования профиля и для добавления карточки)
@@ -143,10 +167,3 @@ editProfileForm.addEventListener('submit', formSubmitHandler);
 
 // Слушатель событий для формы добавления карточки
 addCardForm.addEventListener('submit', formSubmitHandler);
-
-// Вывод блока "Нет добавленных карточек" (вызвать в случае, если список cards пуст)
-function renderNoCards() {
-  const noCardsElement = page.querySelector('.no-cards');
-  noCardsElement.classList.remove('no-cards_hidden');
-}
-
