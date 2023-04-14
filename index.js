@@ -77,15 +77,43 @@
     closeButtons.forEach(button => button.addEventListener('click', closePopup));
 
 
+// ФУНКЦИОНАЛЬНОСТЬ ПРОСМОТРА КАРТИНКИ
+
+  // Наполнение модального окна просмотра картинки
+    function openPopupShowImage(evt) {
+      openPopup(popupShowImage);
+      const eventTargetImage = evt.target.getAttribute('src');
+      const eventTargetCaption = evt.target.nextElementSibling.textContent;
+
+      popupImage.setAttribute('src', eventTargetImage);
+      popupImageCaption.textContent = eventTargetCaption;
+    }
+
+
 // ФУНКЦИОНАЛЬНОСТЬ ДЛЯ КАРТОЧЕК
 
-  // Добавление карточек "из коробки" (при загрузке страницы)
-    initialCards.forEach(card => {
-      const name = card.name;
-      const link = card.link;
+  // Добавление/удаление лайка
+    function likeCard(evt) {
+      evt.target.classList.toggle('button-like_active');
+    };
 
-      addCard(name, link);
-    });
+  // Добавление блока "Нет добавленных карточек" (если список карточек пуст)
+    function renderNoCards() {
+      const noCardsElement = page.querySelector('.no-cards');
+      noCardsElement.classList.remove('no-cards_hidden');
+    };
+
+  // Удаление карточки
+    function deleteCard(evt) {
+      const eventTargetCard = evt.target.parentElement;
+      eventTargetCard.remove();
+
+      const cards = page.querySelectorAll('.card');
+      console.log(cards.length);
+      if (!cards.length) {
+        renderNoCards();
+      };
+    };
 
   // Добавление карточек
     function addCard(placeName, placeImageLink) {
@@ -111,6 +139,14 @@
       cardsContainer.prepend(cardElement);
     };
 
+  // Добавление карточек "из коробки" (при загрузке страницы)
+    initialCards.forEach(card => {
+      const name = card.name;
+      const link = card.link;
+
+      addCard(name, link);
+    });
+
   // Слушатель событий для кнопки открытия окна добавления карточки
     addButton.addEventListener('click', () => {
       openPopup(popupAddCard);
@@ -118,29 +154,6 @@
       placeNameInput.value = '';
       imageLinkInput.value = '';
     });
-
-  // Добавление/удаление лайка
-    function likeCard(evt) {
-      evt.target.classList.toggle('button-like_active');
-    };
-
-  // Удаление карточки
-    function deleteCard(evt) {
-      const eventTargetCard = evt.target.parentElement;
-      eventTargetCard.remove();
-
-      const cards = page.querySelectorAll('.card');
-      console.log(cards.length);
-      if (!cards.length) {
-        renderNoCards();
-      };
-    };
-
-  // Добавление блока "Нет добавленных карточек" (если список карточек пуст)
-    function renderNoCards() {
-      const noCardsElement = page.querySelector('.no-cards');
-      noCardsElement.classList.remove('no-cards_hidden');
-    };
 
   // Обработчик "отправки" формы добавления карточки
     function addFormSubmitHandler(evt) {
@@ -195,15 +208,3 @@
 
   // Слушатель событий для формы редактирования профиля
     editProfileForm.addEventListener('submit', editFormSubmitHandler);
-
-// ФУНКЦИОНАЛЬНОСТЬ ПРОСМОТРА КАРТИНКИ
-
-  // Наполнение модального окна просмотра картинки
-    function openPopupShowImage(evt) {
-      openPopup(popupShowImage);
-      const eventTargetImage = evt.target.getAttribute('src');
-      const eventTargetCaption = evt.target.nextElementSibling.textContent;
-
-      popupImage.setAttribute('src', eventTargetImage);
-      popupImageCaption.textContent = eventTargetCaption;
-    }
