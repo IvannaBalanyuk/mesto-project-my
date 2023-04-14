@@ -11,7 +11,7 @@
   visibility: hidden;
   opacity: 0;
   pointer-events: none;
-  transition: all 0.8s;
+  transition: all 800ms ease;
 
   justify-content: center;
   align-items: center;
