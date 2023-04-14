@@ -21,6 +21,8 @@
 
   // Константы просмотра картинки
     const popupShowImage = page.querySelector('.popup_type_show-image');
+    const popupImage = page.querySelector('.popup__image');
+    const popupImageCaption = page.querySelector('.popup__image-caption');
 
   // Массив кнопок закрытия модальных окон
     const closeButtons = page.querySelectorAll('.button-close');
@@ -53,14 +55,13 @@
   // Наполнение модального окна просмотра картинки
     function openPopupShowImage(evt) {
       openPopup(popupShowImage);
-      const eventTargetImage = evt.target.getAttribute('src');
-      const eventTargetCaption = evt.target.nextElementSibling.textContent;
+      const targetImage = evt.target;
+      const targetCard = targetImage.closest('.card');
+      const targetPlaceName = targetCard.querySelector('.card__place-name');
 
-      const popupImage = page.querySelector('.popup__image');
-      const popupImageCaption = page.querySelector('.popup__image-caption');
-
-      popupImage.setAttribute('src', eventTargetImage);
-      popupImageCaption.textContent = eventTargetCaption;
+      popupImage.src = targetImage.src;
+      popupImage.alt = targetPlaceName.textContent;
+      popupImageCaption.textContent = targetPlaceName.textContent;
     }
 
 
@@ -79,8 +80,8 @@
 
   // Удаление карточки
     function deleteCard(evt) {
-      const eventTargetCard = evt.target.parentElement;
-      eventTargetCard.remove();
+      const targetCard = evt.target.parentElement;
+      targetCard.remove();
 
       const cards = page.querySelectorAll('.card');
       console.log(cards.length);
@@ -138,9 +139,9 @@
   // Обработчик "отправки" формы добавления карточки
     function addFormSubmitHandler(evt) {
       evt.preventDefault();
-      const eventTarget = evt.target; // сохранение в константу цели события submit
+      const targetForm = evt.target; // сохранение в константу цели события submit
 
-      if (eventTarget.classList.contains('form_type_add-card')
+      if (targetForm.classList.contains('form_type_add-card')
       && (placeNameInput.value)
       && (imageLinkInput.value)) {
         addCard(placeNameInput.value, imageLinkInput.value);
@@ -173,9 +174,9 @@
   // Обработчик "отправки" формы редактирования профиля
     function editFormSubmitHandler(evt) {
       evt.preventDefault();
-      const eventTarget = evt.target; // сохранение в константу цели события submit
+      const targetForm = evt.target; // сохранение в константу цели события submit
 
-      if (eventTarget.classList.contains('form_type_edit-profile')
+      if (targetForm.classList.contains('form_type_edit-profile')
       && (userNameInput.value)
       && (userAboutInput.value)) {
         editProfile();
