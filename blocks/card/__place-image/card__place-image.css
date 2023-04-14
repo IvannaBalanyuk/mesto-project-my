@@ -1,11 +1,14 @@
-.card__image {
-  grid-area: image;
-
+.card__place-image {
   display: block;
   width: 100%;
   min-width: 282px;
+  max-height: 282px;
+
+  background-color: #000;
 
   object-fit: cover;
   object-position: center;
   aspect-ratio: 1/1;
+
+  cursor: zoom-in;
 }

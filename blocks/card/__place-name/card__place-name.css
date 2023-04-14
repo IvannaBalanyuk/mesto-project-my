@@ -1,12 +1,6 @@
-.card__description {
-  /* Сброс стилей тега */
-  margin: 0;
-
-  /* Стили класса */
-  grid-area: description;
-  align-self: center;
-
-  width: 100%;
+.card__place-name {
+  width: calc(100% - 62px);
+  margin: 25px 0;
   padding-left: 21px;
   box-sizing: border-box;
 
@@ -14,7 +8,7 @@
   line-height: 29px;
   font-weight: 900;
   color: black;
-  
+
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;

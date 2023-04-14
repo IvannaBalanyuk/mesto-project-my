@@ -13,8 +13,6 @@
   <title>Место</title>
 </head>
 
-<!-- Класс для блокировки прокрутки окна при открытом popup -->
-<!-- page_non-scroll -->
 <body class="page">
   <header class="header">
     <a class="header__logo-link logo-link logo-link_theme_dark" href="#content" target="_parent"></a>
@@ -34,43 +32,12 @@
 
     <!-- Секция cards -->
     <section class="cards" aria-label="Галерея фотографий">
+      <div class="no-cards no-cards_hidden">
+        <p class="no-cards__text">Нет добавленных мест</p>
+      </div>
+
       <ul class="cards__list">
-        <li class="card">
-          <img class="card__image" src="./images/baikal.jpg" alt="Фотография">
-          <h2 class="card__description">Байкал</h2>
-          <button class="card__button-like button-like" type="button" aria-label="Поставить лайк"></button>
-        </li>
 
-        <li class="card">
-          <img class="card__image" src="./images/el'brus.jpg" alt="Фотография">
-          <h2 class="card__description">Эльбрус</h2>
-          <button class="card__button-like button-like" type="button" aria-label="Поставить лайк"></button>
-        </li>
-
-        <li class="card">
-          <img class="card__image" src="./images/karelia.jpg" alt="Фотография">
-          <h2 class="card__description">Карелия</h2>
-          <button class="card__button-like button-like" type="button" aria-label="Поставить лайк"></button>
-        </li>
-
-        <li class="card">
-          <img class="card__image" src="./images/hrebet-nurali.jpg" alt="Фотография">
-          <h2 class="card__description">Хребет Нурали</h2>
-          <button class="card__button-like button-like" type="button" aria-label="Поставить лайк"></button>
-        </li>
-
-        <li class="card">
-          <img class="card__image" src="./images/aniva.jpg" alt="Фотография">
-          div.
-          <h2 class="card__description">Залив Анива</h2>
-          <button class="card__button-like button-like" type="button" aria-label="Поставить лайк"></button>
-        </li>
-
-        <li class="card">
-          <img class="card__image" src="./images/dagestan.jpg" alt="Фотография">
-          <h2 class="card__description">Дагестан</h2>
-          <button class="card__button-like button-like" type="button" aria-label="Поставить лайк"></button>
-        </li>
       </ul>
     </section>
   </main>
@@ -79,35 +46,55 @@
     <p class="footer__copyright" lang="en">&COPY; 2023 Mesto Russia</p>
   </footer>
 
-  <!-- Класс для открытия модального окна -->
-  <!-- popup_opened -->
-  <section class="popup" aria-label="Модальное окно редактирования профиля">
+  <!-- Модальное окно редактирования профиля -->
+  <section class="popup popup_type_edit-profile" aria-label="Модальное окно редактирования профиля">
     <div class="popup__container">
-      <h2  class="popup__title">Редактировать профиль</h2>
+      <h2 class="popup__title">Редактировать профиль</h2>
       <button class="button-close popup__button-close"></button>
-      <form class="form popup__form" action="#" name="form-edit-profile">
-        <fieldset class="form__input-container">
-          <input class="form__input-item" type="text" value="Жак-Ив Кусто" placeholder="Имя" name="user-name">
-          <input class="form__input-item" type="text" value="Исследователь океана" placeholder="О себе" name="user-about">
+      <form class="form popup__form form_type_edit-profile" action="#" name="form-edit-profile">
+        <fieldset class="input form__input">
+          <input class="input__text input__text_type_user-name" type="text" value="#" placeholder="Имя" name="user-name">
+          <input class="input__text input__text_type_user-about" type="text" value="#" placeholder="О себе" name="user-about">
         </fieldset>
-        <button class="button-save form__button-save" type="submit" aria-label="Сохранить изменения">Сохранить</button>
+        <input class="button-save form__button-save" type="submit" aria-label="Сохранить изменения" value="Сохранить">
       </form>
     </div>
   </section>
 
-  <section class="popup" aria-label="Модальное окно добавления карточки места">
+  <!-- Модальное окно добавления карточки -->
+  <section class="popup popup_type_add-card" aria-label="Модальное окно добавления карточки места">
     <div class="popup__container">
       <h2  class="popup__title">Новое место</h2>
       <button class="button-close popup__button-close"></button>
-      <form class="form popup__form" action="#" name="form-add-card">
-        <fieldset class="form__input-container">
-          <input class="form__input-item" type="text" placeholder="Название" name="place-name">
-          <input class="form__input-item" type="text" placeholder="Ссылка на картинку" name="image-link">
+      <form class="form popup__form form_type_add-card" action="#" name="form-add-card">
+        <fieldset class="input form__input">
+          <input class="input__text input__text_type_place-name" type="text" placeholder="Название" name="place-name">
+          <input class="input__text input__text_type_image-link" type="text" placeholder="Ссылка на картинку" name="image-link">
         </fieldset>
-        <button class="button-save form__button-save" type="submit" aria-label="Создать карточку">Создать</button>
+        <input class="button-save form__button-save" type="submit" aria-label="Создать карточку" value="Создать">
       </form>
     </div>
   </section>
 
+  <!-- Модальное окно просмотра картинки -->
+  <section class="popup popup_type_show-image" aria-label="Модальное окно просмотра картинки">
+    <figure class="popup__image-container">
+      <button class="button-close popup__button-close"></button>
+      <img class="popup__image" src="#" alt="Фотография">
+      <figcaption class="popup__image-caption"></figcaption>
+    </figure>
+  </section>
+
+  <!-- Шаблон разметки карточки -->
+  <template id="card-template">
+    <li class="card">
+      <button class="button-delete card__button-delete" type="button" aria-label="Удалить карточку"></button>
+      <img class="card__place-image" src="#" alt="Фотография">
+      <h2 class="card__place-name"></h2>
+      <button class="button-like card__button-like" type="button" aria-label="Поставить лайк"></button>
+    </li>
+  </template>
+
+  <script src="./index.js"></script>
 </body>
 </html>

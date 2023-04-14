@@ -1,4 +1,4 @@
-.form__input-item {
+.input__text {
   /* Сброс стилей тега */
   padding: 0;
   border: 0;
@@ -6,10 +6,14 @@
 
   /* Стили класса */
   width: 100%;
-  padding-bottom: 9px;
+  padding: 10px 3px 9px;
   box-sizing: border-box;
   border-bottom: 1px solid #00000020;
 
   font-size: 14px;
   line-height: 17px;
+}
+
+.input__text:focus-visible {
+  outline: 3px solid #4682B470;
 }

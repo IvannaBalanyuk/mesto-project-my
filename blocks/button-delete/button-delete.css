@@ -1,14 +1,14 @@
-.button-like {
+.button-delete {
   /* Сброс стилей тега */
   padding: 0;
   border: none;
   background: transparent;
 
   /* Стили класса */
-  width: 22px;
+  width: 18px;
   height: 19px;
 
-  background-image: url(../../images/heart.svg);
+  background-image: url(../../images/trash.svg);
   background-repeat: no-repeat;
   background-size: contain;
   background-position: center;
@@ -17,6 +17,6 @@
   transition: 600ms;
 }
 
-.button-like:hover {
+.button-delete:hover {
   opacity: .5;
 }
