@@ -17,10 +17,6 @@
   transition: 600ms;
 }
 
-.button-like:active {
-  background-image: url(../../images/heart_active.svg);
-}
-
 .button-like:hover {
   opacity: .5;
 }
