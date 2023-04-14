@@ -1,6 +1,4 @@
 .card__place-image {
-  grid-area: image;
-
   display: block;
   width: 100%;
   min-width: 282px;

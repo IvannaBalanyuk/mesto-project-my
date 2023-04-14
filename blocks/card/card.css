@@ -5,10 +5,16 @@
   border-radius: 10px;
   overflow: hidden;
 
-  display: grid;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+
+  position: relative;
+
+  /* display: grid;
   grid-template-columns: 1fr 62px;
   grid-template-rows: max-content 79px;
   grid-template-areas:
   "image image"
-  "description button-like";
+  "description button-like"; */
 }
