@@ -21,6 +21,7 @@
     const imageLinkInput = addCardForm.querySelector('.input-text_type_image-link');
 
   // Константы просмотра картинки
+    const cardsImages = page.querySelectorAll('.card__place-image');
     const popupShowImage = page.querySelector('.popup_type_show-image');
     const popupImage = page.querySelector('.popup__image');
     const popupImageCaption = page.querySelector('.popup__image-caption');
@@ -54,16 +55,12 @@
 // ФУНКЦИОНАЛЬНОСТЬ ПРОСМОТРА КАРТИНКИ
 
   // Наполнение модального окна просмотра картинки
-    function openPopupShowImage(evt) {
+    function createPopupShowImage(placeName, placeImageLink) {
       openPopup(popupShowImage);
-      const targetImage = evt.target;
-      const targetCard = targetImage.closest('.card');
-      const targetPlaceName = targetCard.querySelector('.card__place-name');
-
-      popupImage.src = targetImage.src;
-      popupImage.alt = targetPlaceName.textContent;
-      popupImageCaption.textContent = targetPlaceName.textContent;
-    }
+      popupImage.src = placeImageLink;
+      popupImage.alt = placeName;
+      popupImageCaption.textContent = placeName;
+    };
 
 
 // ФУНКЦИОНАЛЬНОСТЬ ДЛЯ КАРТОЧЕК
@@ -108,7 +105,7 @@
       cardElement.querySelector('.button-delete').addEventListener('click', deleteCard);
 
       // слушатель событий на картинку
-      cardPlaceImage.addEventListener('click', openPopupShowImage);
+      cardPlaceImage.addEventListener('click', () => createPopupShowImage(placeName, placeImageLink));
 
       return cardElement;
     };
