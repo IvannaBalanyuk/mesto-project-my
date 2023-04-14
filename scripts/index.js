@@ -35,15 +35,17 @@
     };
 
   // Закрытие модального окна
-    function closePopup() {
-      popupEditProfile.classList.remove('popup_opened');
-      popupAddCard.classList.remove('popup_opened');
-      popupShowImage.classList.remove('popup_opened');
+    function closePopup(popup) {
+      popup.classList.remove('popup_opened');
       page.classList.remove('page_non-scroll');
     };
 
   // Слушатель событий для кнопок закрытия модальных окон
-    closeButtons.forEach(button => button.addEventListener('click', closePopup));
+    closeButtons.forEach(button => button.addEventListener('click', (evt) => {
+      const targetButton = evt.target;
+      const targetPopup = targetButton.closest('.popup');
+      closePopup(targetPopup);
+    }));
 
 
 // ФУНКЦИОНАЛЬНОСТЬ ПРОСМОТРА КАРТИНКИ
@@ -142,7 +144,7 @@
       && (placeNameInput.value)
       && (imageLinkInput.value)) {
         addCard(placeNameInput.value, imageLinkInput.value);
-        closePopup();
+        closePopup(popupAddCard);
       } else {
         console.log('false');
         return false;
@@ -177,7 +179,7 @@
       && (userNameInput.value)
       && (userAboutInput.value)) {
         editProfile();
-        closePopup();
+        closePopup(popupEditProfile);
       } else {
         console.log('false');
         return false;
