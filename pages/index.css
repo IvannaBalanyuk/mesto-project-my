@@ -12,8 +12,7 @@
 @import url(../blocks/button-close/button-close.css);
 @import url(../blocks/button-save/button-save.css);
 @import url(../blocks/button-delete/button-delete.css);
-@import url(../blocks/input/input.css);
-@import url(../blocks/input/__text/input__text.css);
+@import url(../blocks/input-text/input-text.css);
 
 
 /* Стили блоков страницы */
