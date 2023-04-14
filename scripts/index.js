@@ -127,25 +127,14 @@
   // Слушатель событий для кнопки открытия окна добавления карточки
     addButton.addEventListener('click', () => {
       openPopup(popupAddCard);
-
-      placeNameInput.value = '';
-      imageLinkInput.value = '';
+      addCardForm.reset();
     });
 
   // Обработчик "отправки" формы добавления карточки
     function addFormSubmitHandler(evt) {
       evt.preventDefault();
-      const targetForm = evt.target; // сохранение в константу цели события submit
-
-      if (targetForm.classList.contains('form_type_add-card')
-      && (placeNameInput.value)
-      && (imageLinkInput.value)) {
-        addCard(placeNameInput.value, imageLinkInput.value);
-        closePopup(popupAddCard);
-      } else {
-        console.log('false');
-        return false;
-      };
+      addCard(placeNameInput.value, imageLinkInput.value);
+      closePopup(popupAddCard);
     };
 
   // Слушатель событий для формы добавления карточки
@@ -170,17 +159,8 @@
   // Обработчик "отправки" формы редактирования профиля
     function editFormSubmitHandler(evt) {
       evt.preventDefault();
-      const targetForm = evt.target; // сохранение в константу цели события submit
-
-      if (targetForm.classList.contains('form_type_edit-profile')
-      && (userNameInput.value)
-      && (userAboutInput.value)) {
-        editProfile();
-        closePopup(popupEditProfile);
-      } else {
-        console.log('false');
-        return false;
-      };
+      editProfile();
+      closePopup(popupEditProfile);
     };
 
   // Слушатель событий для формы редактирования профиля
