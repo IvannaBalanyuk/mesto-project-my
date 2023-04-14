@@ -12,8 +12,6 @@
     const userAboutInput = editProfileForm.querySelector('.input__text_type_user-about');
 
   // Константы добавления карточек
-    const placeName = page.querySelector('.input__text_type_place-name');
-    const imageLink = page.querySelector('.input__text_type_image-link');
     const addButton = page.querySelector('.button-add');
     const popupAddCard = page.querySelector('.popup_type_add-card');
     const addCardForm = page.querySelector('.form_type_add-card');
@@ -22,8 +20,6 @@
 
   // Константы просмотра картинки
     const popupShowImage = page.querySelector('.popup_type_show-image');
-    const popupImage = page.querySelector('.popup__image');
-    const popupImageCaption = page.querySelector('.popup__image-caption');
 
   // Массив кнопок закрытия модальных окон
     const closeButtons = page.querySelectorAll('.button-close');
@@ -85,6 +81,9 @@
       const eventTargetImage = evt.target.getAttribute('src');
       const eventTargetCaption = evt.target.nextElementSibling.textContent;
 
+      const popupImage = page.querySelector('.popup__image');
+      const popupImageCaption = page.querySelector('.popup__image-caption');
+
       popupImage.setAttribute('src', eventTargetImage);
       popupImageCaption.textContent = eventTargetCaption;
     }
@@ -115,8 +114,20 @@
       };
     };
 
-  // Добавление карточек
-    function addCard(placeName, placeImageLink) {
+  // Получение актуального массива карточек
+    function getCardsArray() {
+      const cardsArray = page.querySelector('.cards__list');
+      return cardsArray;
+    }
+
+  // Добавление карточки в массив карточек
+    function addCard(card) {
+      const actualArray = getCardsArray();
+      actualArray.prepend(card);
+    }
+
+  // Создание карточки
+    function createCard(placeName, placeImageLink) {
       const cardTemplate = document.querySelector('#card-template').content;
       const cardElement = cardTemplate.querySelector('.card').cloneNode(true);
 
@@ -135,8 +146,7 @@
       // слушатель событий на картинку
       cardElement.querySelector('.card__place-image').addEventListener('click', openPopupShowImage);
 
-      const cardsContainer = page.querySelector('.cards__list');
-      cardsContainer.prepend(cardElement);
+      addCard(cardElement);
     };
 
   // Добавление карточек "из коробки" (при загрузке страницы)
@@ -144,7 +154,7 @@
       const name = card.name;
       const link = card.link;
 
-      addCard(name, link);
+      createCard(name, link);
     });
 
   // Слушатель событий для кнопки открытия окна добавления карточки
@@ -163,7 +173,7 @@
       if (eventTarget.classList.contains('form_type_add-card')
       && (placeNameInput.value)
       && (imageLinkInput.value)) {
-        addCard(placeNameInput.value, imageLinkInput.value);
+        createCard(placeNameInput.value, imageLinkInput.value);
         closePopup();
       } else {
         console.log('false');
