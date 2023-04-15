@@ -20,8 +20,10 @@
     const placeNameInput = addCardForm.querySelector('.input-text_type_place-name');
     const imageLinkInput = addCardForm.querySelector('.input-text_type_image-link');
 
+  // Константы удаления карточек
+    const noCardsElement = page.querySelector('.no-cards');
+
   // Константы просмотра картинки
-    const cardsImages = page.querySelectorAll('.card__place-image');
     const popupShowImage = page.querySelector('.popup_type_show-image');
     const popupImage = page.querySelector('.popup__image');
     const popupImageCaption = page.querySelector('.popup__image-caption');
@@ -72,7 +74,6 @@
 
   // Добавление блока "Нет добавленных карточек" (если список карточек пуст)
     function renderNoCards() {
-      const noCardsElement = page.querySelector('.no-cards');
       noCardsElement.classList.remove('no-cards_hidden');
     };
 
@@ -93,19 +94,22 @@
       const cardElement = cardTemplate.querySelector('.card').cloneNode(true);
       const cardPlaceName = cardElement.querySelector('.card__place-name');
       const cardPlaceImage = cardElement.querySelector('.card__place-image');
+      const cardButtonLike = cardElement.querySelector('.button-like');
+      const cardButtonDelete = cardElement.querySelector('.button-delete');
 
       cardPlaceImage.src = placeImageLink;
       cardPlaceImage.alt = placeName;
       cardPlaceName.textContent = placeName;
 
       // слушатель событий на кнопку лайка
-      cardElement.querySelector('.button-like').addEventListener('click', likeCard);
+      cardButtonLike.addEventListener('click', likeCard);
 
       // слушатель событий на кнопку удаления карточки
-      cardElement.querySelector('.button-delete').addEventListener('click', deleteCard);
+      cardButtonDelete.addEventListener('click', deleteCard);
 
       // слушатель событий на картинку
-      cardPlaceImage.addEventListener('click', () => createPopupShowImage(placeName, placeImageLink));
+      cardPlaceImage.addEventListener('click', () =>
+        createPopupShowImage(placeName, placeImageLink));
 
       return cardElement;
     };
@@ -118,10 +122,10 @@
 
   // Добавление карточек "из коробки" (при загрузке страницы)
     initialCards.forEach(card => {
-      const name = card.name;
-      const link = card.link;
+      const cardName = card.name;
+      const cardLink = card.link;
 
-      addCard(name, link);
+      addCard(cardName, cardLink);
     });
 
   // Слушатель событий для кнопки открытия окна добавления карточки
@@ -133,6 +137,7 @@
   // Обработчик "отправки" формы добавления карточки
     function addFormSubmitHandler(evt) {
       evt.preventDefault();
+
       addCard(placeNameInput.value, imageLinkInput.value);
       closePopup(popupAddCard);
     };
@@ -146,6 +151,7 @@
   // Слушатель событий для кнопки открытия окна редактирования профиля
     editButton.addEventListener('click', popup => {
       openPopup(popupEditProfile);
+
       userNameInput.value = userName.textContent;
       userAboutInput.value = userAbout.textContent;
     });
@@ -159,6 +165,7 @@
   // Обработчик "отправки" формы редактирования профиля
     function editFormSubmitHandler(evt) {
       evt.preventDefault();
+
       editProfile();
       closePopup(popupEditProfile);
     };
