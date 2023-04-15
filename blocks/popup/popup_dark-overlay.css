@@ -1,0 +1,10 @@
+.popup_dark-overlay {
+  opacity: 0;
+}
+
+
+.popup_dark-overlay::before {
+  content: '';
+  background-color: #000;
+  opacity: .9;
+}
