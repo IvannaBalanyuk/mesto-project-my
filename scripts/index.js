@@ -70,8 +70,20 @@
       page.classList.remove('page_non-scroll');
     };
 
-  // Слушатель событий для кнопок закрытия модальных окон
-    closeButtons.forEach(button => button.addEventListener('click', closePopup));
+  // Слушатели событий для закрытия модальных окон
+  page.addEventListener('click', (evt) => {
+    if (evt.target.classList.contains('popup') || evt.target.classList.contains('button-close')) {
+      const targetPopup =  evt.target.closest('.popup');
+      closePopup(targetPopup);
+    };
+  });
+
+  page.addEventListener('keydown', (evt) => {
+    if (evt.key === 'Escape') {
+      const targetPopup =  page.querySelector('.popup_opened');
+      closePopup(targetPopup);
+    };
+  });
 
 
 // ФУНКЦИОНАЛЬНОСТЬ ПРОСМОТРА КАРТИНКИ
