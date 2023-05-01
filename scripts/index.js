@@ -12,7 +12,8 @@
     const userAboutInput = editProfileForm.querySelector('.input__text_type_user-about');
 
   // Константы добавления карточек
-    const cardTemplate = document.querySelector('#card-template').content;
+    const cardsContainer = page.querySelector('.cards__list');
+    const cardTemplate = page.querySelector('#card-template').content;
     const addButton = page.querySelector('.button-add');
     const popupAddCard = page.querySelector('.popup_type_add-card');
     const addCardForm = page.querySelector('.form_type_add-card');
@@ -60,7 +61,7 @@
     function openPopup(popup) {
       popup.classList.add('popup_opened');
       page.classList.add('page_non-scroll');
-    };
+    }
 
   // Закрытие модального окна
     function closePopup() {
@@ -68,7 +69,7 @@
       popupAddCard.classList.remove('popup_opened');
       popupShowImage.classList.remove('popup_opened');
       page.classList.remove('page_non-scroll');
-    };
+    }
 
   // Слушатели событий для закрытия модальных окон
   page.addEventListener('click', (evt) => {
@@ -90,42 +91,52 @@
 
   // Наполнение модального окна просмотра картинки
     function openPopupShowImage(evt) {
-      openPopup(popupShowImage);
-      const eventTargetImage = evt.target.getAttribute('src');
-      const eventTargetCaption = evt.target.nextElementSibling.textContent;
+      if (evt.target.classList.contains('card__place-image')) {
+        openPopup(popupShowImage);
+        const eventTargetImage = evt.target.getAttribute('src');
+        const eventTargetCaption = evt.target.nextElementSibling.textContent;
 
-      const popupImage = page.querySelector('.popup__image');
-      const popupImageCaption = page.querySelector('.popup__image-caption');
+        const popupImage = page.querySelector('.popup__image');
+        const popupImageCaption = page.querySelector('.popup__image-caption');
 
-      popupImage.setAttribute('src', eventTargetImage);
-      popupImageCaption.textContent = eventTargetCaption;
+        popupImage.setAttribute('src', eventTargetImage);
+        popupImageCaption.textContent = eventTargetCaption;
+      };
     }
+
+    cardsContainer.addEventListener('click', openPopupShowImage);
 
 
 // ФУНКЦИОНАЛЬНОСТЬ ДЛЯ КАРТОЧЕК
 
   // Добавление/удаление лайка
     function likeCard(evt) {
-      evt.target.classList.toggle('button-like_active');
-    };
+      if (evt.target.classList.contains('button-like')) {
+        evt.target.classList.toggle('button-like_active');
+      };
+    }
+
+    cardsContainer.addEventListener('click', likeCard);
 
   // Добавление блока "Нет добавленных карточек" (если список карточек пуст)
     function renderNoCards() {
       const noCardsElement = page.querySelector('.no-cards');
       noCardsElement.classList.remove('no-cards_hidden');
-    };
+    }
 
   // Удаление карточки
     function deleteCard(evt) {
-      const eventTargetCard = evt.target.parentElement;
-      eventTargetCard.remove();
+      if (evt.target.classList.contains('button-delete')) {
+        evt.target.closest('.card').remove();
 
-      const cards = page.querySelectorAll('.card');
-      console.log(cards.length);
-      if (!cards.length) {
-        renderNoCards();
+        const cards = page.querySelectorAll('.card');
+        if (!cards.length) {
+          renderNoCards();
+        };
       };
-    };
+    }
+
+    cardsContainer.addEventListener('click', deleteCard);
 
   // Создание карточки
     function createCard(placeName, placeImageLink) {
@@ -138,22 +149,13 @@
       cardPlaceImage.setAttribute('alt', placeName);
       cardPlaceName.textContent = placeName;
 
-      // слушатель событий на кнопку лайка
-      cardElement.querySelector('.button-like').addEventListener('click', likeCard);
-
-      // слушатель событий на кнопку удаления карточки
-      cardElement.querySelector('.button-delete').addEventListener('click', deleteCard);
-
-      // слушатель событий на картинку
-      cardPlaceImage.addEventListener('click', openPopupShowImage);
-
       return cardElement;
-    };
+    }
+
 
   // Добавление карточки в контейнер с карточками
     function addCard(placeName, placeImageLink) {
       const cardElement = createCard(placeName, placeImageLink);
-      const cardsContainer = page.querySelector('.cards__list');
       cardsContainer.prepend(cardElement);
     }
 
@@ -187,7 +189,7 @@
         console.log('false');
         return false;
       };
-    };
+    }
 
   // Слушатель событий для формы добавления карточки
     addCardForm.addEventListener('submit', addFormSubmitHandler);
@@ -206,7 +208,7 @@
     function editProfile() {
       userName.textContent = userNameInput.value;
       userAbout.textContent = userAboutInput.value;
-    };
+    }
 
   // Обработчик "отправки" формы редактирования профиля
     function editFormSubmitHandler(evt) {
@@ -222,7 +224,7 @@
         console.log('false');
         return false;
       };
-    };
+    }
 
   // Слушатель событий для формы редактирования профиля
     editProfileForm.addEventListener('submit', editFormSubmitHandler);
