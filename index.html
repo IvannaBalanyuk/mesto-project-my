@@ -36,9 +36,7 @@
         <p class="no-cards__text">Нет добавленных мест</p>
       </div>
 
-      <ul class="cards__list">
-
-      </ul>
+      <ul class="cards__list"></ul>
     </section>
   </main>
 
@@ -51,9 +49,10 @@
     <div class="popup__container">
       <h2 class="popup__title">Редактировать профиль</h2>
       <button class="button-close popup__button-close"></button>
-      <form class="form popup__form form_type_edit-profile" action="#" name="form-edit-profile">
-        <input class="input-text input-text_type_user-name" type="text" placeholder="Имя" name="user-name">
-        <input class="input-text input-text_type_user-about" type="text" placeholder="О себе" name="user-about">
+
+      <form class="form popup__form form_type_edit-profile" action="#" name="editProfile">
+        <input class="input-text input-text_type_user-name" type="text" placeholder="Имя" name="userName">
+        <input class="input-text input-text_type_user-about" type="text" placeholder="О себе" name="userAbout">
         <input class="button-save form__button-save" type="submit" aria-label="Сохранить изменения" value="Сохранить">
       </form>
     </div>
@@ -64,9 +63,10 @@
     <div class="popup__container">
       <h2  class="popup__title">Новое место</h2>
       <button class="button-close popup__button-close"></button>
-      <form class="form popup__form form_type_add-card" action="#" name="form-add-card">
-        <input class="input-text input-text_type_place-name" type="text" placeholder="Название" name="place-name">
-        <input class="input-text input-text_type_image-link" type="text" placeholder="Ссылка на картинку" name="image-link">
+
+      <form class="form popup__form form_type_add-card" action="#" name="addCard">
+        <input class="input-text input-text_type_place-name" type="text" placeholder="Название" name="placeName">
+        <input class="input-text input-text_type_image-link" type="text" placeholder="Ссылка на картинку" name="imageLink">
         <input class="button-save form__button-save" type="submit" aria-label="Создать карточку" value="Создать">
       </form>
     </div>

@@ -1,5 +1,5 @@
   // Массив для карточек "из коробки"
-  const initialCards = [
+  const cardsInitial = [
     {
       name: 'Архыз',
       link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
