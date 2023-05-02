@@ -1,9 +1,0 @@
-.input {
-  /* Сброс стилей тега */
-  padding: 0;
-  border: 0;
-
-  /* Стили класса */
-  display: flex;
-  flex-direction: column;
-}

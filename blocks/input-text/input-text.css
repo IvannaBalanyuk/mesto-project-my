@@ -1,4 +1,4 @@
-.input__text {
+.input-text {
   /* Сброс стилей тега */
   padding: 0;
   border: 0;
@@ -14,6 +14,7 @@
   line-height: 17px;
 }
 
-.input__text:focus-visible {
+.input-text:focus-visible {
   outline: 3px solid #4682B470;
 }
+

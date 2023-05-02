@@ -51,11 +51,10 @@
     <div class="popup__container">
       <h2 class="popup__title">Редактировать профиль</h2>
       <button class="button-close popup__button-close"></button>
+
       <form class="form popup__form form_type_edit-profile" action="#" name="editProfile">
-        <fieldset class="input form__input">
-          <input class="input__text input__text_type_user-name" type="text" value="#" placeholder="Имя" name="userName">
-          <input class="input__text input__text_type_user-about" type="text" value="#" placeholder="О себе" name="userAbout">
-        </fieldset>
+        <input class="input-text input-text_type_user-name" type="text" placeholder="Имя" name="userName">
+        <input class="input-text input-text_type_user-about" type="text" placeholder="О себе" name="userAbout">
         <input class="button-save form__button-save" type="submit" aria-label="Сохранить изменения" value="Сохранить">
       </form>
     </div>
@@ -66,21 +65,20 @@
     <div class="popup__container">
       <h2  class="popup__title">Новое место</h2>
       <button class="button-close popup__button-close"></button>
-      <form class="form popup__form form_type_add-card" action="#" name="addCard">
-        <fieldset class="input form__input">
-          <input class="input__text input__text_type_place-name" type="text" placeholder="Название" name="placeName">
-          <input class="input__text input__text_type_image-link" type="text" placeholder="Ссылка на картинку" name="imageLink">
-        </fieldset>
+
+      <form class="form popup__form form_type_add-card" action="#" name="addCard>
+        <input class="input-text input-text_type_place-name" type="text" placeholder="Название" name="placeName">
+        <input class="input-text input-text_type_image-link" type="text" placeholder="Ссылка на картинку" name="imageLink">
         <input class="button-save form__button-save" type="submit" aria-label="Создать карточку" value="Создать">
       </form>
     </div>
   </section>
 
   <!-- Модальное окно просмотра картинки -->
-  <section class="popup popup_type_show-image" aria-label="Модальное окно просмотра картинки">
+  <section class="popup popup_dark-overlay popup_type_show-image" aria-label="Модальное окно просмотра картинки">
     <figure class="popup__image-container">
       <button class="button-close popup__button-close"></button>
-      <img class="popup__image" src="#" alt="Фотография">
+      <img class="popup__image" src="#">
       <figcaption class="popup__image-caption"></figcaption>
     </figure>
   </section>
@@ -95,6 +93,7 @@
     </li>
   </template>
 
+  <script src="./scripts/initial-cards.js"></script>
   <script src="./scripts/index.js"></script>
 </body>
 </html>

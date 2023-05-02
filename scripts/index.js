@@ -20,37 +20,14 @@
     const formInputPlaceName = formAddCard.elements.placeName;
     const formInputImageLink = formAddCard.elements.imageLink;
 
+  // Константы удаления карточек
+    const noCardsElement = page.querySelector('.no-cards');
+
   // Константы просмотра картинки
     const popupShowImage = page.querySelector('.popup_type_show-image');
-
-  // Массив для карточек "из коробки"
-    const cardsInitial = [
-      {
-        name: 'Архыз',
-        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
-      },
-      {
-        name: 'Челябинская область',
-        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
-      },
-      {
-        name: 'Иваново',
-        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
-      },
-      {
-        name: 'Камчатка',
-        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
-      },
-      {
-        name: 'Холмогорский район',
-        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
-      },
-      {
-        name: 'Байкал',
-        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
-      }
-    ];
-
+    const popupImage = page.querySelector('.popup__image');
+    const popupImageCaption = page.querySelector('.popup__image-caption');
+    
 
 // ОБЩАЯ ФУНКЦИОНАЛЬНОСТЬ
 
@@ -61,10 +38,8 @@
     }
 
   // Закрытие модального окна
-    function closePopup() {
-      popupEditProfile.classList.remove('popup_opened');
-      popupAddCard.classList.remove('popup_opened');
-      popupShowImage.classList.remove('popup_opened');
+    function closePopup(popup) {
+      popup.classList.remove('popup_opened');
       page.classList.remove('page_non-scroll');
     }
 
@@ -85,19 +60,12 @@
 // ФУНКЦИОНАЛЬНОСТЬ ПРОСМОТРА КАРТИНКИ
 
   // Наполнение модального окна просмотра картинки
-    function openPopupShowImage(evt) {
-      if (evt.target.classList.contains('card__place-image')) {
-        openPopup(popupShowImage);
-        const targetImage = evt.target.getAttribute('src');
-        const targetCaption = evt.target.nextElementSibling.textContent;
-
-        const popupImage = page.querySelector('.popup__image');
-        const popupCaption = page.querySelector('.popup__image-caption');
-
-        popupImage.setAttribute('src', targetImage);
-        popupCaption.textContent = targetCaption;
-      };
-    }
+    function createPopupShowImage(placeName, placeImageLink) {
+      openPopup(popupShowImage);
+      popupImage.src = placeImageLink;
+      popupImage.alt = placeName;
+      popupImageCaption.textContent = placeName;
+    };
 
   // Слушатель событий для открытия окна просмотра картинки
     cardsContainer.addEventListener('click', openPopupShowImage);
@@ -117,7 +85,6 @@
 
   // Добавление блока "Нет добавленных карточек" (если список карточек пуст)
     function renderNoCards() {
-      const noCardsElement = page.querySelector('.no-cards');
       noCardsElement.classList.remove('no-cards_hidden');
     }
 
@@ -141,11 +108,13 @@
       const cardElement = cardTemplate.querySelector('.card').cloneNode(true);
       const cardPlaceName = cardElement.querySelector('.card__place-name');
       const cardPlaceImage = cardElement.querySelector('.card__place-image');
+      const cardButtonLike = cardElement.querySelector('.button-like');
+      const cardButtonDelete = cardElement.querySelector('.button-delete');
 
-      cardPlaceImage.setAttribute('src', placeImageLink);
-      cardPlaceImage.setAttribute('alt', placeName);
+      cardPlaceImage.src = placeImageLink;
+      cardPlaceImage.alt = placeName;
       cardPlaceName.textContent = placeName;
-
+      
       return cardElement;
     }
 
@@ -169,14 +138,10 @@
   // Обработчик "отправки" формы добавления карточки
     function addFormSubmitHandler(evt) {
       evt.preventDefault();
-
-      if (evt.target.name === 'formAddCard'
-      && (formInputPlaceName.value)
-      && (formInputImageLink.value)) {
+      
+      if (evt.target.name === 'formAddCard') {
         addCard(formInputPlaceName.value, formInputImageLink.value);
         closePopup();
-      } else {
-        return false;
       };
     }
 
@@ -188,7 +153,7 @@
 
   // Слушатель событий для кнопки открытия окна редактирования профиля
     buttonEdit.addEventListener('click', popup => {
-      openPopup(popupEditProfile);
+      openPopup(popupEditProfile);      
       formInputUserName.value = userName.textContent;
       formInputUserAbout.value = userAbout.textContent;
     });
@@ -202,15 +167,10 @@
   // Обработчик "отправки" формы редактирования профиля
     function editFormSubmitHandler(evt) {
       evt.preventDefault();
-
-      if (evt.target.name === 'formEditProfile'
-      && (formInputUserName.value)
-      && (formInputUserAbout.value)) {
+      
+      if (evt.target.name === 'formEditProfile') {
         editProfile();
         closePopup();
-      } else {
-        console.log('false');
-        return false;
       };
     }
 
