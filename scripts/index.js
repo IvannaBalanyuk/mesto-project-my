@@ -27,7 +27,7 @@
     const popupShowImage = page.querySelector('.popup_type_show-image');
     const popupImage = page.querySelector('.popup__image');
     const popupImageCaption = page.querySelector('.popup__image-caption');
-    
+
 
 // ОБЩАЯ ФУНКЦИОНАЛЬНОСТЬ
 
@@ -60,15 +60,23 @@
 // ФУНКЦИОНАЛЬНОСТЬ ПРОСМОТРА КАРТИНКИ
 
   // Наполнение модального окна просмотра картинки
-    function createPopupShowImage(placeName, placeImageLink) {
+    function createPopupShowImage(placeName, imageLink) {
       openPopup(popupShowImage);
-      popupImage.src = placeImageLink;
+      popupImage.src = imageLink;
       popupImage.alt = placeName;
       popupImageCaption.textContent = placeName;
     };
 
   // Слушатель событий для открытия окна просмотра картинки
-    cardsContainer.addEventListener('click', openPopupShowImage);
+    cardsContainer.addEventListener('click', (evt) => {
+      if (evt.target.classList.contains('card__place-image')) {
+        const targetCard = evt.target.closest('.card');
+        const targetPlaceName = targetCard.querySelector('.card__place-name').textContent;
+        const targetImageLink = evt.target.src;
+
+        createPopupShowImage(targetPlaceName, targetImageLink);
+      };
+    });
 
 
 // ФУНКЦИОНАЛЬНОСТЬ ДЛЯ КАРТОЧЕК
@@ -93,8 +101,7 @@
       if (evt.target.classList.contains('button-delete')) {
         evt.target.closest('.card').remove();
 
-        const cards = page.querySelectorAll('.card');
-        if (!cards.length) {
+        if (!cardsContainer.hasChildNodes()) {
           renderNoCards();
         };
       };
@@ -104,29 +111,27 @@
     cardsContainer.addEventListener('click', deleteCard);
 
   // Создание карточки
-    function createCard(placeName, placeImageLink) {
+    function createCard(cardData) {
       const cardElement = cardTemplate.querySelector('.card').cloneNode(true);
       const cardPlaceName = cardElement.querySelector('.card__place-name');
       const cardPlaceImage = cardElement.querySelector('.card__place-image');
-      const cardButtonLike = cardElement.querySelector('.button-like');
-      const cardButtonDelete = cardElement.querySelector('.button-delete');
 
-      cardPlaceImage.src = placeImageLink;
-      cardPlaceImage.alt = placeName;
-      cardPlaceName.textContent = placeName;
-      
+      cardPlaceImage.src = cardData.link;
+      cardPlaceImage.alt = cardData.name;
+      cardPlaceName.textContent = cardData.name;
+
       return cardElement;
     }
 
   // Добавление карточки в контейнер с карточками
-    function addCard(placeName, placeImageLink) {
-      const cardElement = createCard(placeName, placeImageLink);
+    function addCard(cardData) {
+      const cardElement = createCard(cardData);
       cardsContainer.prepend(cardElement);
     }
 
   // Добавление карточек "из коробки" (при загрузке страницы)
     cardsInitial.forEach(card => {
-      addCard(card.name, card.link);
+      addCard(card);
     });
 
   // Слушатель событий для кнопки открытия окна добавления карточки
@@ -138,10 +143,11 @@
   // Обработчик "отправки" формы добавления карточки
     function addFormSubmitHandler(evt) {
       evt.preventDefault();
-      
-      if (evt.target.name === 'formAddCard') {
-        addCard(formInputPlaceName.value, formInputImageLink.value);
-        closePopup();
+
+      if (evt.target.name === 'addCard') {
+        const cardObj = {name: formInputPlaceName.value, link: formInputImageLink.value};
+        addCard(cardObj);
+        closePopup(popupAddCard);
       };
     }
 
@@ -153,7 +159,7 @@
 
   // Слушатель событий для кнопки открытия окна редактирования профиля
     buttonEdit.addEventListener('click', popup => {
-      openPopup(popupEditProfile);      
+      openPopup(popupEditProfile);
       formInputUserName.value = userName.textContent;
       formInputUserAbout.value = userAbout.textContent;
     });
@@ -167,10 +173,10 @@
   // Обработчик "отправки" формы редактирования профиля
     function editFormSubmitHandler(evt) {
       evt.preventDefault();
-      
-      if (evt.target.name === 'formEditProfile') {
+
+      if (evt.target.name === 'editProfile') {
         editProfile();
-        closePopup();
+        closePopup(popupEditProfile);
       };
     }
 
