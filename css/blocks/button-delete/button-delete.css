@@ -1,0 +1,22 @@
+.button-delete {
+  /* Сброс стилей тега */
+  padding: 0;
+  border: none;
+  background: transparent;
+
+  /* Стили класса */
+  width: 18px;
+  height: 19px;
+
+  background-image: url(../../../accets/images/trash.svg);
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
+
+  cursor: pointer;
+  transition: 600ms;
+}
+
+.button-delete:hover {
+  opacity: .5;
+}

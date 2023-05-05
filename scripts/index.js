@@ -1,58 +1,27 @@
-// ОБЪЯВЛЕНИЕ ГЛОБАЛЬНЫХ ПЕРЕМЕННЫХ
-
-  const page = document.querySelector('.page');
-
-  // Константы редактирования профиля
-    const userName = page.querySelector('.profile__user-name');
-    const userAbout = page.querySelector('.profile__user-about');
-    const buttonEdit = page.querySelector('.button-edit');
-    const popupEditProfile = page.querySelector('.popup_type_edit-profile');
-    const formEditProfile = document.forms.editProfile;
-    const formInputUserName = formEditProfile.elements.userName;
-    const formInputUserAbout = formEditProfile.elements.userAbout;
-
-  // Константы добавления карточек
-    const cardsContainer = page.querySelector('.cards__list');
-    const cardTemplate = page.querySelector('#card-template').content;
-    const buttonAdd = page.querySelector('.button-add');
-    const popupAddCard = page.querySelector('.popup_type_add-card');
-    const formAddCard = document.forms.addCard;
-    const formInputPlaceName = formAddCard.elements.placeName;
-    const formInputImageLink = formAddCard.elements.imageLink;
-
-  // Константы удаления карточек
-    const noCardsElement = page.querySelector('.no-cards');
-
-  // Константы просмотра картинки
-    const popupShowImage = page.querySelector('.popup_type_show-image');
-    const popupImage = page.querySelector('.popup__image');
-    const popupImageCaption = page.querySelector('.popup__image-caption');
-
-
 // ОБЩАЯ ФУНКЦИОНАЛЬНОСТЬ
 
   // Открытие модального окна
     function openPopup(popup) {
-      popup.classList.add('popup_opened');
-      page.classList.add('page_non-scroll');
+      popup.classList.add(popupSelectors.popupOpenedClass);
+      page.classList.add(pageSelectors.nonScrollClass);
     }
 
   // Закрытие модального окна
     function closePopup(popup) {
-      popup.classList.remove('popup_opened');
-      page.classList.remove('page_non-scroll');
+      popup.classList.remove(popupSelectors.popupOpenedClass);
+      page.classList.remove(pageSelectors.nonScrollClass);
     }
 
   // Слушатели событий для закрытия модальных окон
   page.addEventListener('click', (evt) => {
-    if (evt.target.classList.contains('popup') || evt.target.classList.contains('button-close')) {
-      closePopup(evt.target.closest('.popup'));
+    if (evt.target.classList.contains(popupSelectors.popupClass) || evt.target.classList.contains(buttonSelectors.buttonCloseClass)) {
+      closePopup(evt.target.closest(popupSelectors.popupSelector));
     };
   });
 
   page.addEventListener('keydown', (evt) => {
     if (evt.key === 'Escape') {
-      closePopup(page.querySelector('.popup_opened'));
+      closePopup(page.querySelector(popupSelectors.popupOpenedSelector));
     };
   });
 
@@ -62,16 +31,16 @@
   // Наполнение модального окна просмотра картинки
     function createPopupShowImage(placeName, imageLink) {
       openPopup(popupShowImage);
-      popupImage.src = imageLink;
-      popupImage.alt = placeName;
-      popupImageCaption.textContent = placeName;
+      popupImageElement.src = imageLink;
+      popupImageElement.alt = placeName;
+      popupCaptionElement.textContent = placeName;
     };
 
   // Слушатель событий для открытия окна просмотра картинки
     cardsContainer.addEventListener('click', (evt) => {
-      if (evt.target.classList.contains('card__place-image')) {
-        const targetCard = evt.target.closest('.card');
-        const targetPlaceName = targetCard.querySelector('.card__place-name').textContent;
+      if (evt.target.classList.contains(cardSelectors.cardImageClass)) {
+        const targetCard = evt.target.closest(cardSelectors.cardSelector);
+        const targetPlaceName = targetCard.querySelector(cardSelectors.cardNameSelector).textContent;
         const targetImageLink = evt.target.src;
 
         createPopupShowImage(targetPlaceName, targetImageLink);
@@ -83,8 +52,8 @@
 
   // Добавление/удаление лайка
     function likeCard(evt) {
-      if (evt.target.classList.contains('button-like')) {
-        evt.target.classList.toggle('button-like_active');
+      if (evt.target.classList.contains(buttonSelectors.buttonLikeClass)) {
+        evt.target.classList.toggle(buttonSelectors.buttonLikeActiveClass);
       };
     }
 
@@ -93,13 +62,13 @@
 
   // Добавление блока "Нет добавленных карточек" (если список карточек пуст)
     function renderNoCards() {
-      noCardsElement.classList.remove('no-cards_hidden');
+      noCardsElement.classList.remove(cardSelectors.noCardsHiddenClass);
     }
 
   // Удаление карточки
     function deleteCard(evt) {
-      if (evt.target.classList.contains('button-delete')) {
-        evt.target.closest('.card').remove();
+      if (evt.target.classList.contains(buttonSelectors.buttonDeleteClass)) {
+        evt.target.closest(cardSelectors.cardSelector).remove();
 
         if (!cardsContainer.hasChildNodes()) {
           renderNoCards();
@@ -112,9 +81,9 @@
 
   // Создание карточки
     function createCard(cardData) {
-      const cardElement = cardTemplate.querySelector('.card').cloneNode(true);
-      const cardPlaceName = cardElement.querySelector('.card__place-name');
-      const cardPlaceImage = cardElement.querySelector('.card__place-image');
+      const cardElement = cardTemplate.querySelector(cardSelectors.cardSelector).cloneNode(true);
+      const cardPlaceName = cardElement.querySelector(cardSelectors.cardNameSelector);
+      const cardPlaceImage = cardElement.querySelector(cardSelectors.cardImageSelector);
 
       cardPlaceImage.src = cardData.link;
       cardPlaceImage.alt = cardData.name;
@@ -130,13 +99,15 @@
     }
 
   // Добавление карточек "из коробки" (при загрузке страницы)
-    cardsInitial.forEach(card => {
-      addCard(card);
+    initialCards.forEach(initialCardData => {
+      addCard(initialCardData);
     });
 
   // Слушатель событий для кнопки открытия окна добавления карточки
-    buttonAdd.addEventListener('click', () => {
+    buttonAdd.addEventListener('click', (evt) => {
       openPopup(popupAddCard);
+      const buttonElement = formAddCard.querySelector(formSelectors.submitButtonSelector);
+      buttonElement.classList.add(formSelectors.inactiveButtonClass);
       formAddCard.reset();
     });
 
@@ -144,9 +115,9 @@
     function addFormSubmitHandler(evt) {
       evt.preventDefault();
 
-      if (evt.target.name === 'addCard') {
-        const cardObj = {name: formInputPlaceName.value, link: formInputImageLink.value};
-        addCard(cardObj);
+      if (evt.target.name === formNames.formAddCardName) {
+        const newCardData = {name: formInputPlaceName.value, link: formInputImageLink.value};
+        addCard(newCardData);
         closePopup(popupAddCard);
       };
     }
@@ -160,21 +131,21 @@
   // Слушатель событий для кнопки открытия окна редактирования профиля
     buttonEdit.addEventListener('click', popup => {
       openPopup(popupEditProfile);
-      formInputUserName.value = userName.textContent;
-      formInputUserAbout.value = userAbout.textContent;
+      formInputUserName.value = profileUserName.textContent;
+      formInputUserAbout.value = profileUserAbout.textContent;
     });
 
   // Редактирование профиля
     function editProfile() {
-      userName.textContent = formInputUserName.value;
-      userAbout.textContent = formInputUserAbout.value;
+      profileUserName.textContent = formInputUserName.value;
+      profileUserAbout.textContent = formInputUserAbout.value;
     }
 
   // Обработчик "отправки" формы редактирования профиля
     function editFormSubmitHandler(evt) {
       evt.preventDefault();
 
-      if (evt.target.name === 'editProfile') {
+      if (evt.target.name === formNames.formEditProfileName) {
         editProfile();
         closePopup(popupEditProfile);
       };
@@ -182,3 +153,67 @@
 
   // Слушатель событий для формы редактирования профиля
     formEditProfile.addEventListener('submit', editFormSubmitHandler);
+
+
+// ФУНКЦИОНАЛЬНОСТЬ ВАЛИДАЦИИ ФОРМ
+
+    const showInputError = (formElement, inputElement, errorMessage) => {
+      const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
+      inputElement.classList.add(formSelectors.inputErrorClass);
+      errorElement.textContent = errorMessage;
+      errorElement.classList.add(formSelectors.errorActiveClass);
+    };
+
+    const hideInputError = (formElement, inputElement) => {
+      const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
+      inputElement.classList.remove(formSelectors.inputErrorClass);
+      errorElement.classList.remove(formSelectors.errorActiveClass);
+      errorElement.textContent = '';
+    };
+
+    const checkInputValidity = (formElement, inputElement) => {
+      if (!inputElement.validity.valid) {
+        showInputError(formElement, inputElement, inputElement.validationMessage);
+      } else {
+        hideInputError(formElement, inputElement);
+      }
+    };
+
+    const hasInvalidInput = (inputList) => {
+      return inputList.some(inputElement => {
+        return !inputElement.validity.valid;
+      });
+    }
+
+    const toggleButtonState = (inputList, buttonElement) => {
+      if (hasInvalidInput(inputList)) {
+        buttonElement.classList.add(formSelectors.inactiveButtonClass);
+      } else {
+        buttonElement.classList.remove(formSelectors.inactiveButtonClass);
+      };
+    }
+
+    const setEventListeners = (formElement) => {
+      const inputList = Array.from(formElement.querySelectorAll(formSelectors.inputSelector));
+      const buttonElement = formElement.querySelector(formSelectors.submitButtonSelector);
+
+      inputList.forEach((inputElement) => {
+        inputElement.addEventListener('input', function () {
+          checkInputValidity(formElement, inputElement);
+          toggleButtonState(inputList, buttonElement);
+        });
+      });
+    };
+
+    const enableValidation = () => {
+      const formList = Array.from(document.querySelectorAll(formSelectors.formSelector));
+
+      formList.forEach(formElement => {
+        formElement.addEventListener('submit', evt => {
+          evt.preventDefault();
+        });
+        setEventListeners(formElement);
+      });
+    };
+
+    enableValidation();
