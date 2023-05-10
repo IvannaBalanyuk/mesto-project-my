@@ -8,8 +8,7 @@
   <meta name="keywords" content="путешествия, туризм, фотография">
   <meta name="robots" content="all">
   <meta name="author" content="Иванна Баланюк">
-  <link rel="shortcut icon" href="./accets/images/favicon.svg">
-  <link rel="stylesheet" href="./css/pages/index.css">
+  <link rel="shortcut icon" href="<%=require('./accets/images/favicon.svg')%>">
   <title>Место</title>
 </head>
 
@@ -19,9 +18,10 @@
   </header>
 
   <main class="content" id="content">
+
     <!-- Секция profile -->
     <section class="profile" aria-label="Профиль пользователя сайта">
-      <img class="profile__avatar" src="./accets/images/avatar.jpg" alt="Аватар профиля">
+      <img class="profile__avatar" src="<%=require('./accets/images/avatar.jpg')%>" alt="Аватар профиля">
       <div class="profile__info">
         <h1 class="profile__user-name">Жак-Ив Кусто</h1>
         <p class="profile__user-about">Исследователь океана</p>
@@ -117,8 +117,5 @@
       <button class="button-like card__button-like" type="button" aria-label="Поставить лайк"></button>
     </li>
   </template>
-
-  <script src="./scripts/variables.js"></script>
-  <script src="./scripts/index.js"></script>
 </body>
 </html>

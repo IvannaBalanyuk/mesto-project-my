@@ -5,7 +5,8 @@
   background: transparent;
 
   /* Стили класса */
-  padding: 14px 28px;
+  padding: 13px 28px;
+  border: 1px solid #000;
   box-sizing: border-box;
   border-radius: 2px;
 
