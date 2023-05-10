@@ -1,0 +1,22 @@
+.button-like {
+  /* Сброс стилей тега */
+  padding: 0;
+  border: none;
+  background: transparent;
+
+  /* Стили класса */
+  width: 22px;
+  height: 19px;
+
+  background-image: url(../../../accets/images/heart.svg);
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
+
+  cursor: pointer;
+  transition: 600ms;
+}
+
+.button-like:hover {
+  opacity: .5;
+}

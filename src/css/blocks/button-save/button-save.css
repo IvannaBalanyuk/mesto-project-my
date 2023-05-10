@@ -1,0 +1,33 @@
+.button-save {
+  /* Сброс стилей тега */
+  padding: 0;
+  border: none;
+  background: transparent;
+
+  /* Стили класса */
+  padding: 13px 28px;
+  border: 1px solid #000;
+  box-sizing: border-box;
+  border-radius: 2px;
+
+  background-color: #000;
+
+  font-size: 18px;
+  line-height: 22px;
+  color: #fff;
+
+  cursor: pointer;
+  outline: none;
+  transition: 600ms;
+}
+
+.button-save:hover {
+  opacity: .8;
+}
+
+@media screen and (max-width: 768px) {
+  .button-save {
+    font-size: 14px;
+    line-height: 17px;
+  }
+}

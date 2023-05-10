@@ -1,0 +1,5 @@
+.form__input-error_visible {
+  visibility: visible;
+  opacity: 1;
+  pointer-events: all;
+}
