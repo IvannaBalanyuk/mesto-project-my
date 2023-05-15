@@ -56,6 +56,11 @@ buttonEdit.addEventListener('click', popup => {
   openPopup(popupEditProfile);
   formInputUserName.value = profileUserName.textContent;
   formInputUserAbout.value = profileUserAbout.textContent;
+
+  const inputList = Array.from(formEditProfile.querySelectorAll(formSelectors.inputSelector));
+  inputList.forEach((inputElement) => {
+      hideInputError(formEditProfile, inputElement, formSelectors);
+    });
 });
 
 // Слушатель событий для формы редактирования профиля
