@@ -15,7 +15,7 @@ import {
   formInputUserAbout,
  } from '../components/constants.js';
 
-import { hideInputError, setInactiveClass, enableValidation } from '../components/validate.js';
+import { hideInputError, makeButtonInactive, enableValidation } from '../components/validate.js';
 
 import {
   addCard,
@@ -45,7 +45,7 @@ buttonAdd.addEventListener('click', (evt) => {
     });
 
   const buttonElement = formAddCard.querySelector(formSelectors.submitButtonSelector);
-  setInactiveClass(buttonElement, formSelectors);
+  makeButtonInactive(buttonElement, formSelectors);
 });
 
 // Слушатель событий для формы добавления карточки

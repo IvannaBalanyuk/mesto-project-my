@@ -37,21 +37,23 @@
   }
 
 // Функция перевода кнопки сабмит в неактивное состояние
-  const setInactiveClass = (buttonElement, formObject) => {
+  const makeButtonInactive = (buttonElement, formObject) => {
     buttonElement.classList.add(formObject.inactiveButtonClass);
+    buttonElement.setAttribute('disabled', true);
   }
 
 // Функция перевода кнопки сабмит в активное состояние
-  const deleteInactiveClass = (buttonElement, formObject) => {
+  const makeButtonActive = (buttonElement, formObject) => {
     buttonElement.classList.remove(formObject.inactiveButtonClass);
+    buttonElement.removeAttribute('disabled');
   }
 
 // Функция для переключения состояния кнопки отправки формы (при наличии в форме хотя бы одного невалидного поля - кнопка не активна)
   const toggleButtonState = (inputList, buttonElement, formObject) => {
     if (hasInvalidInput(inputList)) {
-      setInactiveClass(buttonElement, formObject);
+      makeButtonInactive(buttonElement, formObject);
     } else {
-      deleteInactiveClass(buttonElement, formObject);
+      makeButtonActive(buttonElement, formObject);
     };
   }
 
@@ -80,4 +82,4 @@
     });
   }
 
-  export { hideInputError, setInactiveClass, enableValidation };
+  export { hideInputError, makeButtonInactive, enableValidation };
