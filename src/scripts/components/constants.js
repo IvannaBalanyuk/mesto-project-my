@@ -1,3 +1,4 @@
+// Карточки из коробки
 export const initialCards = [
   {
     name: 'Архыз',
@@ -25,14 +26,17 @@ export const initialCards = [
   }
 ];
 
+// Body
 export const page = document.querySelector('.page');
 export const pageSelectors = {
   nonScrollClass: 'page_non-scroll',
 }
 
+// Секция profile
 export const profileUserName = page.querySelector('.profile__user-name');
 export const profileUserAbout = page.querySelector('.profile__user-about');
 
+// Кнопки
 export const buttonEdit = page.querySelector('.button-edit');
 export const buttonAdd = page.querySelector('.button-add');
 export const buttonSelectors = {
@@ -42,6 +46,7 @@ export const buttonSelectors = {
   buttonLikeActiveClass: 'button-like_active',
 }
 
+// Модальные окна
 export const popupEditProfile = page.querySelector('.popup_type_edit-profile');
 export const popupAddCard = page.querySelector('.popup_type_add-card');
 export const popupShowImage = page.querySelector('.popup_type_show-image');
@@ -54,6 +59,7 @@ export const popupSelectors = {
   popupOpenedSelector: '.popup_opened',
 }
 
+// Карточки
 export const cardsContainer = page.querySelector('.cards__list');
 export const noCardsElement = page.querySelector('.no-cards');
 export const cardTemplate = page.querySelector('#card-template').content;
@@ -65,6 +71,7 @@ export const cardSelectors = {
   noCardsHiddenClass: 'no-cards_hidden',
 }
 
+// Формы
 export const formEditProfile = document.forms.editProfile;
 export const formAddCard = document.forms.addCard;
 export const formInputUserName = formEditProfile.elements.userName;

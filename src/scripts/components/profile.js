@@ -5,9 +5,9 @@ import {
   formInputUserAbout,
   formNames,
   popupEditProfile,
- } from '../components/constants.js';
+ } from './constants.js';
 
-import { closePopup } from './popup.js';
+import { closePopup } from './utils.js';
 
 
 // Функция для редактирования профиля

@@ -8,9 +8,9 @@ import {
   formNames,
   formInputPlaceName,
   formInputImageLink,
- } from '../components/constants.js';
+ } from './constants.js';
 
-import { closePopup } from './popup.js';
+import { closePopup } from './utils.js';
 
 
 // Функция для добавления/удаления лайка
