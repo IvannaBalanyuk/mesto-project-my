@@ -12,6 +12,8 @@ import {
 
 import { closePopup } from './utils.js';
 
+import { createPopupShowImage } from '../components/modal.js';
+
 
 // Функция для добавления/удаления лайка
   function likeCard(evt) {
@@ -42,9 +44,22 @@ import { closePopup } from './utils.js';
     const cardPlaceName = cardElement.querySelector(cardSelectors.cardNameSelector);
     const cardPlaceImage = cardElement.querySelector(cardSelectors.cardImageSelector);
 
+    cardElement.addEventListener('click', likeCard);
+    cardElement.addEventListener('click', deleteCard);
+
     cardPlaceImage.src = cardData.link;
     cardPlaceImage.alt = cardData.name;
     cardPlaceName.textContent = cardData.name;
+
+    cardPlaceImage.addEventListener('click', (evt) => {
+      if (evt.target.classList.contains(cardSelectors.cardImageClass)) {
+        const targetCard = evt.target.closest(cardSelectors.cardSelector);
+        const targetPlaceName = targetCard.querySelector(cardSelectors.cardNameSelector).textContent;
+        const targetImageLink = evt.target.src;
+
+        createPopupShowImage(targetPlaceName, targetImageLink);
+      };
+    });
 
     return cardElement;
   }
@@ -68,7 +83,5 @@ import { closePopup } from './utils.js';
 
   export {
     addCard,
-    likeCard,
-    deleteCard,
     addFormSubmitHandler,
   };
