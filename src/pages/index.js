@@ -1,4 +1,4 @@
-import './css/pages/index.css';
+import './index.css';
 
 import {
   formSelectors,
@@ -15,22 +15,22 @@ import {
   formInputUserAbout,
   cardsContainer,
   cardSelectors,
- } from './scripts/components/constants.js';
+ } from '../components/constants.js';
 
-import { hideInputError, enableValidation } from './scripts/components/validate.js';
+import { hideInputError, enableValidation } from '../components/validate.js';
 
 import {
   addCard,
   likeCard,
   deleteCard,
   addFormSubmitHandler,
-} from './scripts/components/card.js';
+} from '../components/card.js';
 
-import { openPopup } from './scripts/components/utils.js';
+import { openPopup } from '../components/utils.js';
 
-import { editFormSubmitHandler } from './scripts/components/profile.js';
+import { editFormSubmitHandler } from '../components/profile.js';
 
-import { createPopupShowImage } from './scripts/components/modal.js';
+import { createPopupShowImage } from '../components/modal.js';
 
 // Подключение валидации всех форм страницы
 enableValidation(formSelectors);
