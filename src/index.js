@@ -17,7 +17,7 @@ import {
   cardSelectors,
  } from './scripts/components/constants.js';
 
-import { enableValidation } from './scripts/components/validate.js';
+import { hideInputError, enableValidation } from './scripts/components/validate.js';
 
 import {
   addCard,
@@ -43,9 +43,11 @@ initialCards.forEach(initialCardData => {
 // Слушатель событий для кнопки открытия окна добавления карточки
 buttonAdd.addEventListener('click', (evt) => {
   openPopup(popupAddCard);
-  const buttonElement = formAddCard.querySelector(formSelectors.submitButtonSelector);
-  buttonElement.classList.add(formSelectors.inactiveButtonClass);
   formAddCard.reset();
+  const inputList = Array.from(formAddCard.querySelectorAll(formSelectors.inputSelector));
+  inputList.forEach((inputElement) => {
+      hideInputError(formAddCard, inputElement, formSelectors);
+    });
 });
 
 // Слушатель событий для формы добавления карточки

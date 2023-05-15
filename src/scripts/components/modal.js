@@ -6,7 +6,6 @@ import {
 
 import { openPopup } from './utils.js';
 
-
 // Функция для формирования модального окна просмотра картинки
   function createPopupShowImage(placeName, imageLink) {
     openPopup(popupShowImage);
