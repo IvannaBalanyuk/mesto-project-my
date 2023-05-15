@@ -2,9 +2,9 @@ import {
   popupShowImage,
   popupImageElement,
   popupCaptionElement,
- } from '../components/constants.js';
+ } from './constants.js';
 
-import { openPopup } from '../components/popup.js';
+import { openPopup } from './utils.js';
 
 
 // Функция для формирования модального окна просмотра картинки

@@ -16,6 +16,12 @@
 
 // Функция для проверки валидности поля ввода
   const checkInputValidity = (formElement, inputElement, formObject) => {
+    if (inputElement.validity.patternMismatch) {
+      inputElement.setCustomValidity(inputElement.dataset.errorMessage);
+    } else {
+      inputElement.setCustomValidity("");
+    }
+
     if (!inputElement.validity.valid) {
       showInputError(formElement, inputElement, inputElement.validationMessage, formObject);
     } else {

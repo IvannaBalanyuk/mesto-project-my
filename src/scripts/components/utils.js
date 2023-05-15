@@ -3,7 +3,7 @@ import {
   popupSelectors,
   buttonSelectors,
   pageSelectors,
- } from '../components/constants.js';
+ } from './constants.js';
 
 
 // Функция-обработчик события Escape для модального окна

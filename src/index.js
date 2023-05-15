@@ -26,11 +26,11 @@ import {
   addFormSubmitHandler,
 } from './scripts/components/card.js';
 
-import { openPopup } from './scripts/components/popup.js';
+import { openPopup } from './scripts/components/utils.js';
 
 import { editFormSubmitHandler } from './scripts/components/profile.js';
 
-import { createPopupShowImage } from './scripts/components/popupShowImage.js';
+import { createPopupShowImage } from './scripts/components/modal.js';
 
 // Подключение валидации всех форм страницы
 enableValidation(formSelectors);
