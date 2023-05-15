@@ -70,4 +70,4 @@
     });
   }
 
-  export { enableValidation };
+  export { hideInputError, enableValidation };
