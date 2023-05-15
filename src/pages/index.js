@@ -17,7 +17,7 @@ import {
   cardSelectors,
  } from '../components/constants.js';
 
-import { hideInputError, enableValidation } from '../components/validate.js';
+import { hideInputError, setInactiveClass, enableValidation } from '../components/validate.js';
 
 import {
   addCard,
@@ -44,10 +44,14 @@ initialCards.forEach(initialCardData => {
 buttonAdd.addEventListener('click', (evt) => {
   openPopup(popupAddCard);
   formAddCard.reset();
+  
   const inputList = Array.from(formAddCard.querySelectorAll(formSelectors.inputSelector));
   inputList.forEach((inputElement) => {
       hideInputError(formAddCard, inputElement, formSelectors);
     });
+
+  const buttonElement = formAddCard.querySelector(formSelectors.submitButtonSelector);
+  setInactiveClass(buttonElement, formSelectors);
 });
 
 // Слушатель событий для формы добавления карточки

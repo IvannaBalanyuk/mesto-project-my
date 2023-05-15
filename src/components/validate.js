@@ -36,12 +36,22 @@
     });
   }
 
+// Функция перевода кнопки сабмит в неактивное состояние
+  const setInactiveClass = (buttonElement, formObject) => {
+    buttonElement.classList.add(formObject.inactiveButtonClass);
+  }
+
+// Функция перевода кнопки сабмит в активное состояние
+  const deleteInactiveClass = (buttonElement, formObject) => {
+    buttonElement.classList.remove(formObject.inactiveButtonClass);
+  }
+
 // Функция для переключения состояния кнопки отправки формы (при наличии в форме хотя бы одного невалидного поля - кнопка не активна)
   const toggleButtonState = (inputList, buttonElement, formObject) => {
     if (hasInvalidInput(inputList)) {
-      buttonElement.classList.add(formObject.inactiveButtonClass);
+      setInactiveClass(buttonElement, formObject);
     } else {
-      buttonElement.classList.remove(formObject.inactiveButtonClass);
+      deleteInactiveClass(buttonElement, formObject);
     };
   }
 
@@ -70,4 +80,4 @@
     });
   }
 
-  export { hideInputError, enableValidation };
+  export { hideInputError, setInactiveClass, enableValidation };
