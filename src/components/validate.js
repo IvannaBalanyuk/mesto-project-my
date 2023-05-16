@@ -57,10 +57,20 @@
     };
   }
 
+// Функция для получения массива инпутов формы
+  const getInputList = ((formElement, formObject) => {
+    return Array.from(formElement.querySelectorAll(formObject.inputSelector));
+  });
+
+// Функция для получения сабмита формы
+  const getButtonElement = ((formElement, formObject) => {
+    return formElement.querySelector(formObject.submitButtonSelector);
+  });
+
 // Функция для добавления слушателя событий для полей ввода
   const setEventListeners = (formElement, formObject) => {
-    const inputList = Array.from(formElement.querySelectorAll(formObject.inputSelector));
-    const buttonElement = formElement.querySelector(formObject.submitButtonSelector);
+    const inputList = getInputList(formElement, formObject);
+    const buttonElement = getButtonElement(formElement, formObject);
 
     inputList.forEach((inputElement) => {
       inputElement.addEventListener('input', function () {
@@ -82,4 +92,4 @@
     });
   }
 
-  export { hideInputError, makeButtonInactive, makeButtonActive, enableValidation };
+  export { hideInputError, makeButtonInactive, makeButtonActive, getInputList, getButtonElement, enableValidation };

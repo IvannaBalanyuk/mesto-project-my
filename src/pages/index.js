@@ -15,7 +15,7 @@ import {
   formInputUserAbout,
  } from '../components/constants.js';
 
-import { hideInputError, makeButtonInactive, makeButtonActive, enableValidation } from '../components/validate.js';
+import { hideInputError, makeButtonInactive, makeButtonActive, getInputList, getButtonElement, enableValidation } from '../components/validate.js';
 
 import {
   addCard,
@@ -39,12 +39,12 @@ buttonAdd.addEventListener('click', (evt) => {
   openPopup(popupAddCard);
   formAddCard.reset();
 
-  const inputList = Array.from(formAddCard.querySelectorAll(formSelectors.inputSelector));
+  const inputList = getInputList(formAddCard, formSelectors);
   inputList.forEach((inputElement) => {
       hideInputError(formAddCard, inputElement, formSelectors);
     });
 
-  const buttonElement = formAddCard.querySelector(formSelectors.submitButtonSelector);
+  const buttonElement = getButtonElement(formAddCard, formSelectors);
   makeButtonInactive(buttonElement, formSelectors);
 });
 
@@ -52,16 +52,17 @@ buttonAdd.addEventListener('click', (evt) => {
 formAddCard.addEventListener('submit', addFormSubmitHandler);
 
 // Слушатель событий для кнопки открытия окна редактирования профиля
-buttonEdit.addEventListener('click', popup => {
+buttonEdit.addEventListener('click', () => {
   openPopup(popupEditProfile);
   formInputUserName.value = profileUserName.textContent;
   formInputUserAbout.value = profileUserAbout.textContent;
 
-  const inputList = Array.from(formEditProfile.querySelectorAll(formSelectors.inputSelector));
+  const inputList = getInputList(formEditProfile, formSelectors);
   inputList.forEach((inputElement) => {
       hideInputError(formEditProfile, inputElement, formSelectors);
     });
-  const buttonElement = formEditProfile.querySelector(formSelectors.submitButtonSelector);
+
+  const buttonElement = getButtonElement(formEditProfile, formSelectors);
   makeButtonActive(buttonElement, formSelectors);
 });
 
