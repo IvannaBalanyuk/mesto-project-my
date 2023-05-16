@@ -82,4 +82,4 @@
     });
   }
 
-  export { hideInputError, makeButtonInactive, enableValidation };
+  export { hideInputError, makeButtonInactive, makeButtonActive, enableValidation };

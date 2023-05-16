@@ -15,7 +15,7 @@ import {
   formInputUserAbout,
  } from '../components/constants.js';
 
-import { hideInputError, makeButtonInactive, enableValidation } from '../components/validate.js';
+import { hideInputError, makeButtonInactive, makeButtonActive, enableValidation } from '../components/validate.js';
 
 import {
   addCard,
@@ -61,6 +61,8 @@ buttonEdit.addEventListener('click', popup => {
   inputList.forEach((inputElement) => {
       hideInputError(formEditProfile, inputElement, formSelectors);
     });
+  const buttonElement = formEditProfile.querySelector(formSelectors.submitButtonSelector);
+  makeButtonActive(buttonElement, formSelectors);
 });
 
 // Слушатель событий для формы редактирования профиля
