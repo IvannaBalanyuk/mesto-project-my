@@ -1,31 +1,65 @@
 import {
   profileUserName,
   profileUserAbout,
+  profileAvatarImage,
+  popupEditProfile,
+  popupChangeAvatar,
   formInputUserName,
   formInputUserAbout,
-  formNames,
-  popupEditProfile,
- } from './constants.js';
+  formInputAvatarLink,
+} from './constants.js';
 
-import { closePopup } from './utils.js';
+import {
+  getProfileData,
+  patchProfileData,
+  patchAvatarData,
+} from './api.js';
+
+import {
+  closePopup,
+} from './utils.js';
 
 
-// Функция для редактирования профиля
-  function editProfile() {
+// Добавление на страницу информации о пользователе с сервера
+  const renderUploadedProfile = () => {
+    getProfileData()
+    .then((profileData) => {
+      profileUserName.textContent = profileData.name;
+      profileUserAbout.textContent = profileData.about;
+      profileAvatarImage.src = profileData.avatar;
+    })
+  }
+
+// Отрисовка данных пользователя на странице
+  const renderProfileInfo = () => {
     profileUserName.textContent = formInputUserName.value;
     profileUserAbout.textContent = formInputUserAbout.value;
   }
 
-// Функция-обработчик "отправки" формы редактирования профиля
-  function editFormSubmitHandler(evt) {
+// Обработчик "отправки" формы редактирования профиля
+  const editFormSubmitHandler = (evt) => {
     evt.preventDefault();
-
-    if (evt.target.name === formNames.formEditProfileName) {
-      editProfile();
-      closePopup(popupEditProfile);
-    };
+    renderProfileInfo();
+    patchProfileData(formInputUserName.value, formInputUserAbout.value);
+    closePopup(popupEditProfile);
   }
 
-  export {
-    editFormSubmitHandler,
-  };
+// Отрисовка обновленного аватара на странице
+  const renderNewAvatar = () => {
+    profileAvatarImage.src = formInputAvatarLink.value;
+  }
+
+// Обработчик "отправки" формы обновления аватара
+  const changeFormSubmitHandler = (evt) => {
+    evt.preventDefault();
+    renderNewAvatar();
+    patchAvatarData(formInputAvatarLink.value);
+    closePopup(popupChangeAvatar);
+  }
+
+
+export {
+  renderUploadedProfile,
+  editFormSubmitHandler,
+  changeFormSubmitHandler,
+}

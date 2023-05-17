@@ -1,0 +1,12 @@
+.card__likes-counter {
+  margin: 0 26px 22px;
+
+  font-size: 13px;
+  line-height: 16px;
+  font-weight: 400;
+  color: black;
+
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}

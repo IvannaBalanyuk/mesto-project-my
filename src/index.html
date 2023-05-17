@@ -21,10 +21,15 @@
 
     <!-- Секция profile -->
     <section class="profile" aria-label="Профиль пользователя сайта">
-      <img class="profile__avatar" src="<%=require('./accets/images/avatar.jpg')%>" alt="Аватар профиля">
+      <div class="profile__avatar">
+        <button class="profile__avatar-button" type="button" aria-label="Обновить аватар">
+          <img class="profile__avatar-image" src="#" alt="Аватар профиля">
+        </button>
+      </div>
+
       <div class="profile__info">
-        <h1 class="profile__user-name">Жак-Ив Кусто</h1>
-        <p class="profile__user-about">Исследователь океана</p>
+        <h1 class="profile__user-name"></h1>
+        <p class="profile__user-about"></p>
         <button class="button-edit profile__button-edit" type="button" aria-label="Редактировать профиль"></button>
       </div>
       <button class="button-add profile__button-add" type="button" aria-label="Добавить фотографию"></button>
@@ -76,6 +81,25 @@
     </div>
   </section>
 
+  <!-- Модальное окно обновления аватара -->
+  <section class="popup popup_type_change-avatar" aria-label="Модальное окно обновления аватара">
+    <div class="popup__container">
+      <h2  class="popup__title">Обновить аватар</h2>
+      <button class="button-close popup__button-close"></button>
+
+      <form class="form popup__form form_type_change-avatar" action="#" name="changeAvatar" novalidate>
+        <input class="form__input" name="avatarLink" id="avatar-link-input"
+          type="url"
+          placeholder="Ссылка на картинку"
+          required
+        >
+        <span class="form__input-error avatar-link-input-error"></span>
+
+        <input class="button-save form__button-save" type="submit" aria-label="Обновить аватар" value="Сохранить">
+      </form>
+    </div>
+  </section>
+
   <!-- Модальное окно добавления карточки -->
   <section class="popup popup_type_add-card" aria-label="Модальное окно добавления карточки места">
     <div class="popup__container">
@@ -120,7 +144,10 @@
       <button class="button-delete card__button-delete" type="button" aria-label="Удалить карточку"></button>
       <img class="card__place-image" src="#">
       <h2 class="card__place-name"></h2>
-      <button class="button-like card__button-like" type="button" aria-label="Поставить лайк"></button>
+      <div class="card__likes-container">
+        <button class="button-like card__button-like" type="button" aria-label="Поставить лайк"></button>
+        <div class="card__likes-counter">0</div>
+      </div>
     </li>
   </template>
 </body>
