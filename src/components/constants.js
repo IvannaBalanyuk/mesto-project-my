@@ -23,6 +23,7 @@
     buttonLikeClass: 'button-like',
     buttonLikeSelector: '.button-like',
     buttonLikeActiveClass: 'button-like_active',
+    buttonSaveSelector: '.button-save',
   }
 
 // Модальные окна

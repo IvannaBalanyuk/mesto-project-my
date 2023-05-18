@@ -24,13 +24,6 @@
     })
     .then((res) => {
       return checkResult(res);
-    })
-    .then((data) => {
-      return data;
-    })
-    .catch((err) => {
-      console.log(`Ошибка: ${err}`);
-      return (`Ошибка: ${err}`);
     });
   }
 
@@ -46,13 +39,6 @@
     })
     .then((res) => {
       return checkResult(res);
-    })
-    .then((data) => {
-      return data;
-    })
-    .catch((err) => {
-      console.log(`Ошибка: ${err}`);
-      return (`Ошибка: ${err}`);
     });
   }
 
@@ -67,13 +53,6 @@
     })
     .then((res) => {
       return checkResult(res);
-    })
-    .then((data) => {
-      return data;
-    })
-    .catch((err) => {
-      console.log(`Ошибка: ${err}`);
-      return (`Ошибка: ${err}`);
     });
   }
 
@@ -85,13 +64,6 @@
     })
     .then((res) => {
       return checkResult(res);
-    })
-    .then((data) => {
-      return data;
-    })
-    .catch((err) => {
-      console.log(`Ошибка: ${err}`);
-      return (`Ошибка: ${err}`);
     });
   }
 
@@ -107,17 +79,10 @@
     })
     .then((res) => {
       return checkResult(res);
-    })
-    .then((data) => {
-      return data;
-    })
-    .catch((err) => {
-      console.log(`Ошибка: ${err}`);
-      return (`Ошибка: ${err}`);
     });
   }
 
-// Отправка на сервер информации о новой карточке
+// Отправка на сервер информации об удалении карточки
   const deleteCardData = (cardId) => {
     return fetch(`${config.baseUrl}/cards/${cardId}`, {
       method: 'DELETE',
@@ -125,13 +90,6 @@
     })
     .then((res) => {
       return checkResult(res);
-    })
-    .then((data) => {
-      return data;
-    })
-    .catch((err) => {
-      console.log(`Ошибка: ${err}`);
-      return (`Ошибка: ${err}`);
     });
   }
 
@@ -143,13 +101,6 @@
     })
     .then((res) => {
       return checkResult(res);
-    })
-    .then((data) => {
-      return data;
-    })
-    .catch((err) => {
-      console.log(`Ошибка: ${err}`);
-      return (`Ошибка: ${err}`);
     });
   }
 
@@ -161,13 +112,6 @@
     })
     .then((res) => {
       return checkResult(res);
-    })
-    .then((data) => {
-      return data;
-    })
-    .catch((err) => {
-      console.log(`Ошибка: ${err}`);
-      return (`Ошибка: ${err}`);
     });
   }
 
