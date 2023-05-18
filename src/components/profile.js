@@ -4,6 +4,8 @@ import {
   profileAvatarImage,
   popupEditProfile,
   popupChangeAvatar,
+  formEditProfile,
+  formChangeAvatar,
   formInputUserName,
   formInputUserAbout,
   formInputAvatarLink,
@@ -17,17 +19,24 @@ import {
 
 import {
   closePopup,
+  renderLoading,
 } from './utils.js';
 
 
 // Добавление на страницу информации о пользователе с сервера
   const renderUploadedProfile = () => {
     getProfileData()
-    .then((profileData) => {
-      profileUserName.textContent = profileData.name;
-      profileUserAbout.textContent = profileData.about;
-      profileAvatarImage.src = profileData.avatar;
-    })
+      .then((data) => {
+        return data;
+      })
+      .then((profileData) => {
+        profileUserName.textContent = profileData.name;
+        profileUserAbout.textContent = profileData.about;
+        profileAvatarImage.src = profileData.avatar;
+      })
+      .catch((err) => {
+        console.log(`Ошибка: ${err}`);
+      });
   }
 
 // Отрисовка данных пользователя на странице
@@ -39,8 +48,22 @@ import {
 // Обработчик "отправки" формы редактирования профиля
   const editFormSubmitHandler = (evt) => {
     evt.preventDefault();
+    renderLoading(true, formEditProfile, 'Сохранить');
+
+    patchProfileData(formInputUserName.value, formInputUserAbout.value)
+      .then((data) => {
+        return data;
+      })
+
+      .catch((err) => {
+        console.log(`Ошибка: ${err}`);
+      })
+
+      .finally((fin) => {
+        renderLoading(false, formEditProfile, 'Сохранить');
+      });
+
     renderProfileInfo();
-    patchProfileData(formInputUserName.value, formInputUserAbout.value);
     closePopup(popupEditProfile);
   }
 
@@ -52,8 +75,22 @@ import {
 // Обработчик "отправки" формы обновления аватара
   const changeFormSubmitHandler = (evt) => {
     evt.preventDefault();
+    renderLoading(true, formChangeAvatar, 'Сохранить');
+
+    patchAvatarData(formInputAvatarLink.value)
+      .then((data) => {
+        return data;
+      })
+
+      .catch((err) => {
+        console.log(`Ошибка: ${err}`);
+      })
+
+      .finally((fin) => {
+        renderLoading(false, formChangeAvatar, 'Сохранить');
+      });
+
     renderNewAvatar();
-    patchAvatarData(formInputAvatarLink.value);
     closePopup(popupChangeAvatar);
   }
 

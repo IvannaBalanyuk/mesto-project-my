@@ -74,6 +74,16 @@ import {
     });
   }
 
+// Отрисовка сообщения о процессе загрузки
+  const renderLoading = (isLoading, formElement, baseButtonValue) => {
+    const buttonElement = formElement.querySelector(buttonSelectors.buttonSaveSelector);
+    if(isLoading) {
+      buttonElement.value = 'Сохранение...';
+    } else {
+      buttonElement.value = baseButtonValue;
+    }
+  }
+
 
 export {
   openPopup,
@@ -82,4 +92,5 @@ export {
   makeButtonActive,
   makeButtonInactive,
   resetFormErrors,
+  renderLoading,
 }
