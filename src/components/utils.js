@@ -75,12 +75,12 @@ import {
   }
 
 // Отрисовка сообщения о процессе загрузки
-  const renderLoading = (isLoading, formElement, baseButtonValue) => {
+  const renderLoading = (isLoading, formElement, loadingValue, baseValue) => {
     const buttonElement = formElement.querySelector(buttonSelectors.buttonSaveSelector);
     if(isLoading) {
-      buttonElement.value = 'Сохранение...';
+      buttonElement.value = loadingValue;
     } else {
-      buttonElement.value = baseButtonValue;
+      buttonElement.value = baseValue;
     }
   }
 

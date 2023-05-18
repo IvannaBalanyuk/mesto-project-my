@@ -1,11 +1,7 @@
-// Конфиг для формирования запросов
-  const config = {
-    baseUrl: "https://nomoreparties.co/v1/plus-cohort-24",
-    headers: {
-        authorization: "53e7280d-81b7-4e82-b5c1-fc2456f5c412",
-        "Content-Type": "application/json",
-    },
-  };
+import {
+  config,
+} from './constants.js';
+
 
 // Проверка результата выполнения запроса
   const checkResult = (res) => {

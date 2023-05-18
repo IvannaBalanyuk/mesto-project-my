@@ -1,15 +1,24 @@
 import {
   myId,
+  submitValues,
   buttonSelectors,
   noCardsElement,
   popupAddCard,
+  popupDeleteCard,
   cardsContainer,
   cardSelectors,
   cardTemplate,
   formAddCard,
+  formDeleteCard,
   formInputPlaceName,
   formInputImageLink,
 } from './constants.js';
+
+import {
+  openPopup,
+  closePopup,
+  renderLoading,
+} from './utils.js';
 
 import {
   getCardsData,
@@ -18,11 +27,6 @@ import {
   putLikeData,
   deleteLikeData
 } from './api.js';
-
-import {
-  closePopup,
-  renderLoading,
-} from './utils.js';
 
 import {
   createPopupShowImage,
@@ -49,12 +53,10 @@ import {
         .then((data) => {
           return data;
         })
-
         .then((card) => {
           const likesNumberData = String(card.likes.length);
           renderLikesCounter(targetCard, likesNumberData);
         })
-
         .catch((err) => {
           console.log(`Ошибка: ${err}`);
         });
@@ -64,12 +66,10 @@ import {
         .then((data) => {
           return data;
         })
-
         .then((card) => {
           const likesNumberData = String(card.likes.length);
           renderLikesCounter(targetCard, likesNumberData);
         })
-
         .catch((err) => {
           console.log(`Ошибка: ${err}`);
         });
@@ -84,18 +84,27 @@ import {
 
 // Удаление карточки
   const deleteCard = (evt) => {
+    openPopup(popupDeleteCard);
     const targetCard = evt.target.closest(cardSelectors.cardSelector);
+    formDeleteCard.addEventListener('submit', (evt) => {
+      evt.preventDefault();
+      renderLoading(true, formDeleteCard, submitValues.deleting, submitValues.yes);
 
-    deleteCardData(targetCard.id)
-      .then((data) => {
-        return data;
-      })
-      .catch((err) => {
-        console.log(`Ошибка: ${err}`);
-      });
+      deleteCardData(targetCard.id)
+        .then((data) => {
+          return data;
+        })
+        .catch((err) => {
+          console.log(`Ошибка: ${err}`);
+        })
+        .finally(() => {
+          renderLoading(false, formDeleteCard, submitValues.deleting, submitValues.yes);
+        });
 
-    targetCard.remove();
-    if (!cardsContainer.hasChildNodes()) renderNoCards();
+      targetCard.remove();
+      if (!cardsContainer.hasChildNodes()) renderNoCards();
+      closePopup(popupDeleteCard);
+    });
   }
 
 // Создание разметки карточки
@@ -125,23 +134,23 @@ import {
 // Обработчик "отправки" формы добавления карточки
   const addFormSubmitHandler = (evt) => {
     evt.preventDefault();
-    renderLoading(true, formAddCard, 'Создать');
+    renderLoading(true, formAddCard, submitValues.saving, submitValues.create);
 
     const cardData = {name: formInputPlaceName.value, link: formInputImageLink.value};
     const cardElement = createCardMarkup(cardData);
+
     postCardData(formInputPlaceName.value, formInputImageLink.value)
       .then((data) => {
         return data;
       })
-
-      .then((card) => cardElement.setAttribute('id', `${card._id}`))
-
+      .then((card) => {
+        cardElement.setAttribute('id', `${card._id}`);
+      })
       .catch((err) => {
         console.log(`Ошибка: ${err}`);
       })
-
-      .finally((fin) => {
-        renderLoading(false, formAddCard, 'Создать');
+      .finally(() => {
+        renderLoading(false, formAddCard, submitValues.saving, submitValues.create);
       });
 
     addCard(cardElement);
@@ -154,7 +163,6 @@ import {
     .then((data) => {
       return data;
     })
-
     .then((cards) => {
       cards.forEach(card => {
         const cardData = {name: card.name, link: card.link};
@@ -180,7 +188,6 @@ import {
         addCard(cardElement);
       })
     })
-
     .catch((err) => {
       console.log(`Ошибка: ${err}`);
     });
