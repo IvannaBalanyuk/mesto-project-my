@@ -1,4 +1,5 @@
 import {
+  submitValues,
   profileUserName,
   profileUserAbout,
   profileAvatarImage,
@@ -12,15 +13,15 @@ import {
 } from './constants.js';
 
 import {
+  closePopup,
+  renderLoading,
+} from './utils.js';
+
+import {
   getProfileData,
   patchProfileData,
   patchAvatarData,
 } from './api.js';
-
-import {
-  closePopup,
-  renderLoading,
-} from './utils.js';
 
 
 // Добавление на страницу информации о пользователе с сервера
@@ -48,19 +49,17 @@ import {
 // Обработчик "отправки" формы редактирования профиля
   const editFormSubmitHandler = (evt) => {
     evt.preventDefault();
-    renderLoading(true, formEditProfile, 'Сохранить');
+    renderLoading(true, formEditProfile, submitValues.saving, submitValues.save);
 
     patchProfileData(formInputUserName.value, formInputUserAbout.value)
       .then((data) => {
         return data;
       })
-
       .catch((err) => {
         console.log(`Ошибка: ${err}`);
       })
-
-      .finally((fin) => {
-        renderLoading(false, formEditProfile, 'Сохранить');
+      .finally(() => {
+        renderLoading(false, formEditProfile, submitValues.saving, submitValues.save);
       });
 
     renderProfileInfo();
@@ -75,19 +74,17 @@ import {
 // Обработчик "отправки" формы обновления аватара
   const changeFormSubmitHandler = (evt) => {
     evt.preventDefault();
-    renderLoading(true, formChangeAvatar, 'Сохранить');
+    renderLoading(true, formChangeAvatar, submitValues.saving, submitValues.save);
 
     patchAvatarData(formInputAvatarLink.value)
       .then((data) => {
         return data;
       })
-
       .catch((err) => {
         console.log(`Ошибка: ${err}`);
       })
-
-      .finally((fin) => {
-        renderLoading(false, formChangeAvatar, 'Сохранить');
+      .finally(() => {
+        renderLoading(false, formChangeAvatar, submitValues.saving, submitValues.save);
       });
 
     renderNewAvatar();

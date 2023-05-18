@@ -59,7 +59,7 @@ import {
     popupCaptionElement.textContent = targetPlaceName;
   }
 
-  
+
 export {
   createPopupEditProfile,
   createPopupChangeAvatar,

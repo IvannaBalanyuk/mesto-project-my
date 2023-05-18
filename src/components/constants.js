@@ -4,8 +4,26 @@
     nonScrollClass: 'page_non-scroll',
   }
 
+// Конфиг для формирования запросов
+  export const config = {
+    baseUrl: "https://nomoreparties.co/v1/plus-cohort-24",
+    headers: {
+        authorization: "53e7280d-81b7-4e82-b5c1-fc2456f5c412",
+        "Content-Type": "application/json",
+    },
+  };
+
 // Мой Id
   export const myId = '3efa99fb862700e7ea4331b9';
+
+// Значения кнопок сабмит
+  export const submitValues = {
+    save: 'Сохранить',
+    create: 'Создать',
+    yes: 'Да',
+    saving: 'Сохранение...',
+    deleting: 'Удаление...',
+  };
 
 // Секция profile
   export const profileUserName = page.querySelector('.profile__user-name');
@@ -30,6 +48,7 @@
   export const popupEditProfile = page.querySelector('.popup_type_edit-profile');
   export const popupChangeAvatar = page.querySelector('.popup_type_change-avatar');
   export const popupAddCard = page.querySelector('.popup_type_add-card');
+  export const popupDeleteCard = page.querySelector('.popup_type_delete-card');
   export const popupShowImage = page.querySelector('.popup_type_show-image');
   export const popupImageElement = page.querySelector('.popup__image');
   export const popupCaptionElement = page.querySelector('.popup__image-caption');
@@ -57,6 +76,7 @@
   export const formEditProfile = document.forms.editProfile;
   export const formChangeAvatar = document.forms.changeAvatar;
   export const formAddCard = document.forms.addCard;
+  export const formDeleteCard = document.forms.deleteCard;
   export const formInputUserName = formEditProfile.elements.userName;
   export const formInputUserAbout = formEditProfile.elements.userAbout;
   export const formInputAvatarLink = formChangeAvatar.elements.avatarLink;

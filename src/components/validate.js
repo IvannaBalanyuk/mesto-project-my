@@ -8,6 +8,7 @@ import {
   getInputList,
 } from './utils.js';
 
+
 // Показ сообщения об ошибке ввода
   const showInputError = (formElement, inputElement, errorMessage) => {
     const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
