@@ -48,4 +48,4 @@
 
 **Страница на GitHub Pages**
 
-* [Ссылка на GitHub Pages]([https://www.figma.com/file/2cn9N9jSkmxD84oJik7xL7/JavaScript.-Sprint-4?node-id=0%3A1](https://ivannabalanyuk.github.io/mesto-project/)
+* [Ссылка на GitHub Pages](https://ivannabalanyuk.github.io/mesto-project/)
