@@ -44,3 +44,8 @@
 * [Ссылка на макет в Figma - первая часть](https://www.figma.com/file/2cn9N9jSkmxD84oJik7xL7/JavaScript.-Sprint-4?node-id=0%3A1)
 * [Ссылка на макет в Figma - вторая часть](https://www.figma.com/file/bjyvbKKJN2naO0ucURl2Z0/JavaScript.-Sprint-5?node-id=0%3A1&t=PB6SQYzdXRmO7LkX-1)
 
+---
+
+**Страница на GitHub Pages**
+
+* [Ссылка на GitHub Pages]([https://www.figma.com/file/2cn9N9jSkmxD84oJik7xL7/JavaScript.-Sprint-4?node-id=0%3A1](https://ivannabalanyuk.github.io/mesto-project/)
