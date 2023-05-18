@@ -10,23 +10,23 @@ import {
 
 
 // Показ сообщения об ошибке ввода
-  const showInputError = (formElement, inputElement, errorMessage) => {
+  const showInputError = (formElement, inputElement, errorMessage, selectorsObj) => {
     const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
-    inputElement.classList.add(formSelectors.inputErrorClass);
+    inputElement.classList.add(selectorsObj.inputErrorClass);
     errorElement.textContent = errorMessage;
-    errorElement.classList.add(formSelectors.errorActiveClass);
+    errorElement.classList.add(selectorsObj.errorActiveClass);
   }
 
 // Скрытие сообщения об ошибке ввода
-  const hideInputError = (formElement, inputElement) => {
+  const hideInputError = (formElement, inputElement, selectorsObj) => {
     const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
-    inputElement.classList.remove(formSelectors.inputErrorClass);
-    errorElement.classList.remove(formSelectors.errorActiveClass);
+    inputElement.classList.remove(selectorsObj.inputErrorClass);
+    errorElement.classList.remove(selectorsObj.errorActiveClass);
     errorElement.textContent = '';
   }
 
 // Проверка валидности поля ввода
-  const checkInputValidity = (formElement, inputElement) => {
+  const checkInputValidity = (formElement, inputElement, selectorsObj) => {
     if (inputElement.validity.patternMismatch) {
       inputElement.setCustomValidity(inputElement.dataset.errorMessage);
     } else {
@@ -34,9 +34,9 @@ import {
     }
 
     if (!inputElement.validity.valid) {
-      showInputError(formElement, inputElement, inputElement.validationMessage);
+      showInputError(formElement, inputElement, inputElement.validationMessage, selectorsObj);
     } else {
-      hideInputError(formElement, inputElement);
+      hideInputError(formElement, inputElement, selectorsObj);
     }
   }
 
@@ -57,26 +57,26 @@ import {
   }
 
 // Добавление слушателя событий всем полям ввода
-  const setEventListeners = (formElement) => {
+  const setEventListeners = (formElement, selectorsObj) => {
     const inputList = getInputList(formElement);
 
     inputList.forEach((inputElement) => {
       inputElement.addEventListener('input', function () {
-        checkInputValidity(formElement, inputElement);
+        checkInputValidity(formElement, inputElement, selectorsObj);
         toggleButtonState(inputList, formElement);
       });
     });
   }
 
 // Включение валидации всех форм
-  const enableValidation = () => {
-    const formList = Array.from(document.querySelectorAll(formSelectors.formSelector));
+  const enableValidation = (selectorsObj) => {
+    const formList = Array.from(document.querySelectorAll(selectorsObj.formSelector));
 
     formList.forEach(formElement => {
       formElement.addEventListener('submit', evt => {
         evt.preventDefault();
       });
-      setEventListeners(formElement);
+      setEventListeners(formElement, selectorsObj);
     });
   }
 

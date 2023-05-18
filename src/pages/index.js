@@ -7,6 +7,7 @@ import {
   formEditProfile,
   formChangeAvatar,
   formAddCard,
+  formSelectors,
 } from '../components/constants.js';
 
 import {
@@ -38,7 +39,7 @@ import {
   renderUploadedCards();
 
 // Подключение валидации всех форм страницы
-  enableValidation();
+  enableValidation(formSelectors);
 
 // Слушатель событий для кнопки открытия окна редактирования профиля
   buttonEdit.addEventListener('click', createPopupEditProfile);

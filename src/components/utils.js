@@ -70,7 +70,7 @@ import {
   const resetFormErrors = (formElement) => {
     const inputList = getInputList(formElement);
     inputList.forEach((inputElement) => {
-      hideInputError(formElement, inputElement);
+      hideInputError(formElement, inputElement, formSelectors);
     });
   }
 
