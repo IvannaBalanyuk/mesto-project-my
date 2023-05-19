@@ -6,37 +6,45 @@ import {
   formSelectors,
 } from './constants.js';
 
- import {
-  hideInputError,
-} from './validate.js';
+ import { hideInputError } from './validate.js';
 
+
+// Отрисовка сообщения о процессе загрузки
+const renderLoading = (isLoading, formElement, loadingValue, baseValue) => {
+  const buttonElement = formElement.querySelector(buttonSelectors.buttonSaveSelector);
+  if(isLoading) {
+    buttonElement.value = loadingValue;
+  } else {
+    buttonElement.value = baseValue;
+  }
+}
 
 // Обработчик события Escape для модального окна
   const closeByEscapeHandler = (evt) => {
     if (evt.key === 'Escape') {
-      const openedPopup = page.querySelector(popupSelectors.popupOpenedSelector);
-      closePopup(openedPopup);
+      closePopup(page.querySelector(popupSelectors.popupOpenedSelector));
     };
   }
 
 // Обработчик события click для модального окна
   const closeByClickHandler = (evt) => {
-    if (evt.target.classList.contains(popupSelectors.popupClass) || evt.target.classList.contains(buttonSelectors.buttonCloseClass)) {
-      closePopup(evt.target.closest(popupSelectors.popupSelector));
+    if (evt.target.classList.contains(popupSelectors.popupClass) ||
+      evt.target.classList.contains(buttonSelectors.buttonCloseClass)) {
+        closePopup(evt.target.closest(popupSelectors.popupSelector));
     };
   }
 
 // Открытие модального окна
-  const openPopup = (popup) => {
-    popup.classList.add(popupSelectors.popupOpenedClass);
+  const openPopup = (popupElement) => {
+    popupElement.classList.add(popupSelectors.popupOpenedClass);
     page.classList.add(pageSelectors.nonScrollClass);
     page.addEventListener('keydown', closeByEscapeHandler);
     page.addEventListener('click', closeByClickHandler);
   }
 
 // Закрытие модального окна
-  const closePopup = (popup) => {
-    popup.classList.remove(popupSelectors.popupOpenedClass);
+  const closePopup = (popupElement) => {
+    popupElement.classList.remove(popupSelectors.popupOpenedClass);
     page.classList.remove(pageSelectors.nonScrollClass);
     page.removeEventListener('keydown', closeByEscapeHandler);
     page.removeEventListener('click', closeByClickHandler);
@@ -68,29 +76,19 @@ import {
 
 // Сброс сообщений об ошибке ввода
   const resetFormErrors = (formElement) => {
-    const inputList = getInputList(formElement);
-    inputList.forEach((inputElement) => {
+    const inputListElement = getInputList(formElement);
+    inputListElement.forEach((inputElement) => {
       hideInputError(formElement, inputElement, formSelectors);
     });
   }
 
-// Отрисовка сообщения о процессе загрузки
-  const renderLoading = (isLoading, formElement, loadingValue, baseValue) => {
-    const buttonElement = formElement.querySelector(buttonSelectors.buttonSaveSelector);
-    if(isLoading) {
-      buttonElement.value = loadingValue;
-    } else {
-      buttonElement.value = baseValue;
-    }
-  }
-
 
 export {
+  renderLoading,
   openPopup,
   closePopup,
   getInputList,
   makeButtonActive,
   makeButtonInactive,
   resetFormErrors,
-  renderLoading,
 }

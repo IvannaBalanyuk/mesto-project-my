@@ -50,8 +50,8 @@
   export const popupAddCard = page.querySelector('.popup_type_add-card');
   export const popupDeleteCard = page.querySelector('.popup_type_delete-card');
   export const popupShowImage = page.querySelector('.popup_type_show-image');
-  export const popupImageElement = page.querySelector('.popup__image');
-  export const popupCaptionElement = page.querySelector('.popup__image-caption');
+  export const popupImage = page.querySelector('.popup__image');
+  export const popupCaption = page.querySelector('.popup__image-caption');
   export const popupSelectors = {
     popupClass: 'popup',
     popupSelector: '.popup',
@@ -61,7 +61,7 @@
 
 // Карточки
   export const cardsContainer = page.querySelector('.cards__list');
-  export const noCardsElement = page.querySelector('.no-cards');
+  export const noCards = page.querySelector('.no-cards');
   export const cardTemplate = page.querySelector('#card-template').content;
   export const cardSelectors = {
     cardSelector: '.card',
