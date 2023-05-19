@@ -61,7 +61,7 @@ import {
     popupCaption.textContent = targetPlaceName;
   }
 
-  // Создание модального окна добавления карточки
+  // Создание модального окна удаления карточки
   const createPopupDeleteCard = (evt) => {
     if(evt.target.classList.contains(buttonSelectors.buttonDeleteClass)) {
       openPopup(popupDeleteCard);
