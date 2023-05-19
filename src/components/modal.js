@@ -5,8 +5,8 @@ import {
   popupChangeAvatar,
   popupAddCard,
   popupShowImage,
-  popupImageElement,
-  popupCaptionElement,
+  popupImage,
+  popupCaption,
   cardSelectors,
   formEditProfile,
   formChangeAvatar,
@@ -54,9 +54,9 @@ import {
     const targetCard = evt.target.closest(cardSelectors.cardSelector);
     const targetPlaceName = targetCard.querySelector(cardSelectors.cardNameSelector).textContent;
     const targetImageLink = evt.target.src;
-    popupImageElement.src = targetImageLink;
-    popupImageElement.alt = targetPlaceName;
-    popupCaptionElement.textContent = targetPlaceName;
+    popupImage.src = targetImageLink;
+    popupImage.alt = targetPlaceName;
+    popupCaption.textContent = targetPlaceName;
   }
 
 

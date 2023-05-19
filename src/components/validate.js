@@ -1,8 +1,4 @@
 import {
-  formSelectors,
-} from './constants.js';
-
-import {
   makeButtonInactive,
   makeButtonActive,
   getInputList,
