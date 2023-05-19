@@ -53,6 +53,7 @@ import {
   createPopupEditProfile,
   createPopupChangeAvatar,
   createPopupAddCard,
+  createPopupDeleteCard,
 } from '../components/modal.js';
 
 
@@ -184,16 +185,8 @@ formAddCard.addEventListener('submit', addFormSubmitHandler);
 
 // УДАЛЕНИЕ КАРТОЧКИ
 
-// Обработчик события click на кнопке удаления карточки
-const deleteCard = (evt) => {
-  if(evt.target.classList.contains(buttonSelectors.buttonDeleteClass)) {
-    openPopup(popupDeleteCard);
-    window.targetCard = evt.target.closest(cardSelectors.cardSelector);
-  };
-}
-
 // Слушатель событий на кнопку удаления карточки (делегирование)
-cardsContainer.addEventListener('click', deleteCard);
+cardsContainer.addEventListener('click', createPopupDeleteCard);
 
 // Обработчик события submit формы удаления карточки
 const deleteFormSubmitHandler = (evt) => {
