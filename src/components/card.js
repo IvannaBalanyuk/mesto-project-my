@@ -20,7 +20,7 @@ const createCard = (link, name, cardId, likes, ownerId) => {
   placeImageElement.src = link;
   placeImageElement.alt = name;
   placeNameElement.textContent = name;
-  cardElement.setAttribute('id', `${cardId}`);
+  cardElement.setAttribute('data-id', `${cardId}`);
   if(checkLikesData(likes)) toggleLikeStatus(buttonLikeElement);
   if(ownerId !== myId) buttonDeleteElement.remove();
 

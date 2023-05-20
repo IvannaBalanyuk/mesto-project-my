@@ -3,12 +3,7 @@ import { config } from './constants.js';
 
 // Проверка результата выполнения запроса
 const checkResult = (res) => {
-  // Тут безусловно согласна, спасибо) Но пока не могу так сделать - редактор почему-то ругается на return и в dev сборке ошибка лезет. Может плагин какой, буду выяснять. Много мест есть в коде, где хотела бы подсократить)
-  if(res.ok) {
-    return res.json();
-  } else {
-    return Promise.reject(res.status);
-  }
+  return res.ok ? res.json() : Promise.reject(res.status);
 }
 
 // Загрузка информации о пользователе с сервера

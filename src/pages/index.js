@@ -53,6 +53,7 @@ import {
   createPopupEditProfile,
   createPopupChangeAvatar,
   createPopupAddCard,
+  targetCard,
   createPopupDeleteCard,
 } from '../components/modal.js';
 
@@ -63,37 +64,18 @@ enableValidation(formSelectors);
 
 // ЗАГРУЗКА ДАННЫХ С СЕРВЕРА
 
-// Загрузка данных о пользователе
-const renderUploadedProfile = () => {
-  getProfileData()
-    .then((profileData) => {
-      renderProfile(profileData.name, profileData.about);
-      renderAvatar(profileData.avatar);
-    })
-    .catch((err) => {
-      console.log(`Ошибка: ${err}`);
-    });
-}
-
-// Загрузка данных о карточках
-const renderUploadedCards = () => {
-  getCardsData()
-  .then((cardsData) => {
+Promise.all([getProfileData(), getCardsData()])
+  .then(([profileData, cardsData]) => {
+    renderProfile(profileData.name, profileData.about);
+    renderAvatar(profileData.avatar);
     cardsData.forEach((cardData) => {
+      cardsData.reverse();
       addCard(createCard(cardData.link, cardData.name, cardData._id, cardData.likes, cardData.owner._id));
     })
   })
-  .catch((err) => {
-    console.log(`Ошибка: ${err}`);
-  });
-}
-
-const promises = [renderUploadedProfile, renderUploadedCards];
-
-Promise.all(promises)
-  .then(() => {
-    renderUploadedProfile();
-    renderUploadedCards();
+  .catch(([profileDataErr, cardsDataErr]) => {
+    console.log(`Ошибка: ${profileDataErr}`);
+    console.log(`Ошибка: ${cardsDataErr}`);
   });
 
 
@@ -193,9 +175,9 @@ const deleteFormSubmitHandler = (evt) => {
   evt.preventDefault();
   renderLoading(true, formDeleteCard, submitValues.deleting, submitValues.yes);
 
-  deleteCardData(window.targetCard.id)
+  deleteCardData(targetCard.dataset.id)
     .then(() => {
-      window.targetCard.remove();
+      targetCard.remove();
       if (!cardsContainer.hasChildNodes()) renderNoCards();
       closePopup(popupDeleteCard);
     })
@@ -218,7 +200,7 @@ const handleLikeCard = (evt) => {
   if(evt.target.classList.contains(buttonSelectors.buttonLikeClass)) {
     const targetCard = evt.target.closest(cardSelectors.cardSelector);
     if(!checkLikeStatus(evt.target)) {
-      putLikeData(targetCard.id)
+      putLikeData(targetCard.dataset.id)
         .then((cardData) => {
           toggleLikeStatus(evt.target);
           renderLikesCounter(targetCard, cardData.likes);
@@ -227,7 +209,7 @@ const handleLikeCard = (evt) => {
           console.log(`Ошибка: ${err}`);
         });
     } else {
-      deleteLikeData(targetCard.id)
+      deleteLikeData(targetCard.dataset.id)
         .then((cardData) => {
           toggleLikeStatus(evt.target);
           renderLikesCounter(targetCard, cardData.likes);

@@ -61,19 +61,21 @@ import {
     popupCaption.textContent = targetPlaceName;
   }
 
-  // Создание модального окна удаления карточки
-  const createPopupDeleteCard = (evt) => {
-    if(evt.target.classList.contains(buttonSelectors.buttonDeleteClass)) {
-      openPopup(popupDeleteCard);
-      window.targetCard = evt.target.closest(cardSelectors.cardSelector);
-    };
-  }
+// Создание модального окна удаления карточки
+let targetCard;
+const createPopupDeleteCard = (evt) => {
+  if(evt.target.classList.contains(buttonSelectors.buttonDeleteClass)) {
+    openPopup(popupDeleteCard);
+    targetCard = evt.target.closest(cardSelectors.cardSelector);
+  };
+}
 
 
 export {
   createPopupEditProfile,
   createPopupChangeAvatar,
   createPopupAddCard,
+  targetCard,
   createPopupDeleteCard,
   createPopupShowImage,
 }
