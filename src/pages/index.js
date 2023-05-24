@@ -68,7 +68,7 @@ Promise.all([getProfileData(), getCardsData()])
   .then(([profileData, cardsData]) => {
     renderProfile(profileData.name, profileData.about);
     renderAvatar(profileData.avatar);
-    cardsData.forEach((cardData) => {
+    cardsData.reverse().forEach((cardData) => {
       addCard(createCard(cardData.link, cardData.name, cardData._id, cardData.likes, cardData.owner._id));
     })
   })
