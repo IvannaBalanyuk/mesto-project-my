@@ -10,6 +10,7 @@ import { createPopupShowImage } from './modal.js';
 
 
 // Создание карточки
+
 const createCard = (link, name, cardId, likes, ownerId) => {
   const cardElement = cardTemplate.querySelector(cardSelectors.cardSelector).cloneNode(true);
   const placeNameElement = cardElement.querySelector(cardSelectors.cardNameSelector);
