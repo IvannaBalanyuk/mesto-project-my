@@ -56,7 +56,7 @@
       <button class="button-close popup__button-close"></button>
 
       <form class="form popup__form form_type_edit-profile" action="#" name="editProfile" novalidate>
-        <input class="form__input" name="userName" id="user-name-input"
+        <input class="form__input form__input_type_user-name" name="userName" id="user-name-input"
           type="text"
           placeholder="Имя"
           minlength="2" maxlength="40"
@@ -66,7 +66,7 @@
         >
         <span class="form__input-error user-name-input-error"></span>
 
-        <input class="form__input" name="userAbout" id="user-about-input"
+        <input class="form__input form__input_type_user-about" name="userAbout" id="user-about-input"
           type="text"
           placeholder="О себе"
           minlength="2" maxlength="200"
@@ -130,13 +130,13 @@
   </section>
 
   <!-- Модальное окно подтверждения удаления карточки -->
-  <section class="popup popup_type_delete-card" aria-label="Модальное окно подтверждения удаления карточки">
+  <section class="popup popup_type_confirm-deletion" aria-label="Модальное окно подтверждения удаления карточки">
     <div class="popup__container">
       <h2  class="popup__title">Вы уверены?</h2>
       <button class="button-close popup__button-close"></button>
 
-      <form class="form popup__form form_type_delete-card" action="#" name="deleteCard" novalidate>
-        <input class="button-save form__button-save" type="submit" aria-label="Подтвердить удаление карточки" value="Да">
+      <form class="form popup__form form_type_confirm-deletion" action="#" name="confirmDeletion" novalidate>
+        <input class="button-save form__button-save button_type_confirm-deletion" type="submit" aria-label="Подтвердить удаление карточки" value="Да">
       </form>
     </div>
   </section>
@@ -151,7 +151,7 @@
   </section>
 
   <!-- Шаблон разметки карточки -->
-  <template id="card-template">
+  <template class="default-card-template">
     <li class="card" data-id="">
       <button class="button-delete card__button-delete" type="button" aria-label="Удалить карточку"></button>
       <img class="card__place-image" src="#">
