@@ -16,11 +16,9 @@ export const submitValues = {
   deleting: 'Удаление...',
 };
 
-
-// БЛОКИ, ЭЛЕМЕНТЫ, СЕЛЕКТОРЫ
-
 // Страница
 export const page = document.querySelector('.page');
+
 export const pageSelectors = {
   nonScrollClass: 'page_non-scroll',
 }
@@ -45,6 +43,9 @@ export const cardSelectors = {
   imageSelector: '.card__place-image',
   nameSelector: '.card__place-name',
   likesCounterSelector: '.card__likes-counter',
+  buttonDeleteSelector: '.button-delete',
+  buttonLikeSelector: '.button-like',
+  buttonLikeActiveClass: 'button-like_active',
 }
 
 // Кнопки
@@ -53,20 +54,13 @@ export const buttons = {
   changeAvatar: page.querySelector('.profile__avatar-button'),
   addCard: page.querySelector('.button-add'),
 }
-export const buttonSelectors = {
-  buttonCloseClass: 'button-close',
-  buttonDeleteSelector: '.button-delete',
-  buttonLikeSelector: '.button-like',
-  buttonLikeActiveClass: 'button-like_active',
-  buttonSaveSelector: '.button-save',
-  buttonConfirmSelector: '.button_type_confirm-deletion',
-}
 
 // Модальные окна
 export const popupSelectors = {
   popupOpenedClass: 'popup_opened',
   imageSelector: '.popup__image',
   captionSelector: '.popup__image-caption',
+  buttonCloseClass: 'button-close',
   popupEditProfile: '.popup_type_edit-profile',
   popupChangeAvatar: '.popup_type_change-avatar',
   popupAddCard: '.popup_type_add-card',
@@ -81,10 +75,7 @@ export const forms = {
   addCard: page.querySelector('.form_type_add-card'),
   confirmDeletion: page.querySelector('.form_type_confirm-deletion'),
 }
-export const formInputs = {
-  inputUserName: page.querySelector('.form__input_type_user-name'),
-  inputUserAbout: page.querySelector('.form__input_type_user-about'),
-}
+
 export const formSelectors = {
   formSelector: '.form',
   inputSelector: '.form__input',
@@ -92,6 +83,7 @@ export const formSelectors = {
   inactiveButtonClass: 'button-save_disabled',
   inputErrorClass: 'form__input_type_error',
   errorActiveClass: 'form__input-error_visible',
+  confirmButtonSelector: '.button_type_confirm-deletion',
 }
 
 // Шаблоны

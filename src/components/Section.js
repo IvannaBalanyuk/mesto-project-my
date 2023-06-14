@@ -1,8 +1,6 @@
-import { page } from './constants.js';
-
 export default class Section {
-  constructor(containerSelector, noItemsHiddenClass, renderer)  {
-    this._container = page.querySelector(containerSelector);
+  constructor(containerSelector, noItemsHiddenClass, renderer) {
+    this._container = document.querySelector(containerSelector);
     this._renderer = renderer;
     this._noItemsHiddenClass = noItemsHiddenClass;
   }
@@ -14,7 +12,6 @@ export default class Section {
   renderItems(items) {
     items.reverse().forEach((item) => {
       const element = this._renderer(item);
-      this.addItem(element);
     });
   }
 

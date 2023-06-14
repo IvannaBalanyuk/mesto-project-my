@@ -1,10 +1,8 @@
-import { page } from './constants.js';
-
 export default class UserInfo {
-  constructor(selectors) {
-    this._name = page.querySelector(selectors.nameSelector);
-    this._about = page.querySelector(selectors.aboutSelector);
-    this._avatar = page.querySelector(selectors.avatarSelector);
+  constructor(profileSelectors) {
+    this._name = document.querySelector(profileSelectors.nameSelector);
+    this._about = document.querySelector(profileSelectors.aboutSelector);
+    this._avatar = document.querySelector(profileSelectors.avatarSelector);
   }
 
   getUserInfo() {

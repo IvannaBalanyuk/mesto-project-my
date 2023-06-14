@@ -1,29 +1,28 @@
-import {
-  makeButtonInactive,
-  makeButtonActive,
-  getInputList,
-} from './utils.js';
-
 export default class FormValidator {
-  constructor(selectors, formElement) {
-    this._selectors = selectors;
+  constructor(formSelectors, formElement) {
+    this._formSelectors = formSelectors;
     this._form = formElement;
+    this._submitButton = this._form.querySelector(this._formSelectors.submitButtonSelector);
+  }
+
+  _getInputList() {
+    return Array.from(this._form.querySelectorAll(this._formSelectors.inputSelector));
   }
 
   // Показ сообщения об ошибке ввода
   _showInputError(inputElement) {
     const errorElement = this._form.querySelector(`.${inputElement.id}-error`);
-    inputElement.classList.add(this._selectors.inputErrorClass);
+    inputElement.classList.add(this._formSelectors.inputErrorClass);
     errorElement.textContent = inputElement.validationMessage;
-    errorElement.classList.add(this._selectors.errorActiveClass);
+    errorElement.classList.add(this._formSelectors.errorActiveClass);
   }
 
   // Скрытие сообщения об ошибке ввода
   _hideInputError(inputElement) {
     const errorElement = this._form.querySelector(`.${inputElement.id}-error`);
-    inputElement.classList.remove(this._selectors.inputErrorClass);
-    errorElement.classList.remove(this._selectors.errorActiveClass);
+    inputElement.classList.remove(this._formSelectors.inputErrorClass);
     errorElement.textContent = '';
+    errorElement.classList.remove(this._formSelectors.errorActiveClass);
   }
 
   // Проверка валидности поля ввода
@@ -51,15 +50,17 @@ export default class FormValidator {
   // Переключение состояния кнопки отправки формы
   _toggleButtonState(inputList) {
     if (this._hasInvalidInput(inputList)) {
-      makeButtonInactive(this._form);
+      this._submitButton.classList.add(this._formSelectors.inactiveButtonClass);
+      this._submitButton.setAttribute('disabled', true);
     } else {
-      makeButtonActive(this._form);
+      this._submitButton.classList.remove(this._formSelectors.inactiveButtonClass);
+      this._submitButton.removeAttribute('disabled');
     };
   }
 
   // Включение валидации всех форм
   enableValidation() {
-    this._inputList = getInputList(this._form);
+    this._inputList = this._getInputList();
     this._inputList.forEach((inputElement) => {
       inputElement.addEventListener('input', () => {
         this._checkInputValidity(inputElement);
@@ -69,7 +70,9 @@ export default class FormValidator {
   }
 
   // Сброс сообщений об ошибке ввода при открытии окна
-  resetFormErrors() {
+  resetValidation() {
+    this._toggleButtonState(this._inputList);
+
     this._inputList.forEach((inputElement) => {
       this._hideInputError(inputElement);
     });

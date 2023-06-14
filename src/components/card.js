@@ -1,18 +1,21 @@
-import {
-  page,
-  buttonSelectors,
-  cardSelectors,
-} from './constants.js';
-
 export default class Card {
-  constructor(data, userId, templateSelector, imageClickHandler, likeClickHandler, deleteClickHandler) {
+  constructor(
+    data,
+    userId,
+    templateSelector,
+    cardSelectors,
+    imageClickHandler,
+    likeClickHandler,
+    deleteClickHandler
+  ) {
     this.userId = userId;
-    this._id = data._id;
+    this.id = data._id;
     this.likes = data.likes;
     this._link = data.link;
     this._name = data.name;
     this._ownerId = data.owner._id;
     this._templateSelector = templateSelector;
+    this._cardSelectors = cardSelectors;
     this._imageClickHandler =  imageClickHandler;
     this._likeClickHandler = likeClickHandler;
     this._deleteClickHandler = deleteClickHandler;
@@ -20,10 +23,10 @@ export default class Card {
 
   // Получение разметки карточки
   _getElement() {
-    this._cardElement = page
+    this._cardElement = document
       .querySelector(this._templateSelector)
       .content
-      .querySelector(cardSelectors.cardSelector)
+      .querySelector(this._cardSelectors.cardSelector)
       .cloneNode(true);
     return this._cardElement;
   }
@@ -42,17 +45,17 @@ export default class Card {
   }
 
   // Проверка наличия лайка пользователя
-  checkLikesData() {
+  hasLikeFromUser() {
     return this.likes.some((like) => like._id === this.userId);
   }
 
   // Отрисовка счетчика лайков
   renderLikesData() {
-    if (this.checkLikesData()) {
-      this._likeButtonElement.classList.add(buttonSelectors.buttonLikeActiveClass);
+    if (this.hasLikeFromUser()) {
+      this._likeButtonElement.classList.add(this._cardSelectors.buttonLikeActiveClass);
       this._likesCounter.textContent = this.likes.length;
     } else {
-      this._likeButtonElement.classList.remove(buttonSelectors.buttonLikeActiveClass);
+      this._likeButtonElement.classList.remove(this._cardSelectors.buttonLikeActiveClass);
       this._likesCounter.textContent = this.likes.length;
     }
   }
@@ -60,11 +63,11 @@ export default class Card {
   // Создание карточки
   create() {
     this._cardElement = this._getElement();
-    this._nameElement = this._cardElement.querySelector(cardSelectors.nameSelector);
-    this._imageElement = this._cardElement.querySelector(cardSelectors.imageSelector);
-    this._likeButtonElement = this._cardElement.querySelector(buttonSelectors.buttonLikeSelector);
-    this._deleteButtonElement = this._cardElement.querySelector(buttonSelectors.buttonDeleteSelector);
-    this._likesCounter = this._cardElement.querySelector(cardSelectors.likesCounterSelector);
+    this._nameElement = this._cardElement.querySelector(this._cardSelectors.nameSelector);
+    this._imageElement = this._cardElement.querySelector(this._cardSelectors.imageSelector);
+    this._likeButtonElement = this._cardElement.querySelector(this._cardSelectors.buttonLikeSelector);
+    this._deleteButtonElement = this._cardElement.querySelector(this._cardSelectors.buttonDeleteSelector);
+    this._likesCounter = this._cardElement.querySelector(this._cardSelectors.likesCounterSelector);
 
     this._imageElement.src = this._link;
     this._imageElement.alt = this._name;

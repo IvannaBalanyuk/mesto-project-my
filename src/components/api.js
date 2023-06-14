@@ -42,12 +42,12 @@ export default class Api {
     });
   }
 
-  patchAvatarData([avatar]) {
+  patchAvatarData([ link ]) {
     return fetch(`${this._baseUrl}/users/me/avatar`, {
       method: 'PATCH',
       headers: this._headers,
       body: JSON.stringify({
-        avatar: avatar,
+        avatar: link,
       })
     })
     .then((res) => {
@@ -55,7 +55,7 @@ export default class Api {
     });
   }
 
-  postCardData([cardName, cardLink]) {
+  postCardData([ cardName, cardLink ]) {
     return fetch(`${ this._baseUrl }/cards`, {
       method: 'POST',
       headers: this._headers,
