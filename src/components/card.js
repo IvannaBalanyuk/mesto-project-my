@@ -1,68 +1,88 @@
-import {
-  myId,
-  buttonSelectors,
-  cardTemplate,
-  noCards,
-  cardSelectors,
-} from './constants.js';
+export default class Card {
+  constructor(
+    data,
+    userId,
+    templateSelector,
+    cardSelectors,
+    imageClickHandler,
+    likeClickHandler,
+    deleteClickHandler
+  ) {
+    this.userId = userId;
+    this.id = data._id;
+    this.likes = data.likes;
+    this._link = data.link;
+    this._name = data.name;
+    this._ownerId = data.owner._id;
+    this._templateSelector = templateSelector;
+    this._cardSelectors = cardSelectors;
+    this._imageClickHandler =  imageClickHandler;
+    this._likeClickHandler = likeClickHandler;
+    this._deleteClickHandler = deleteClickHandler;
+  }
 
-import { createPopupShowImage } from './modal.js';
+  // Получение разметки карточки
+  _getElement() {
+    this._cardElement = document
+      .querySelector(this._templateSelector)
+      .content
+      .querySelector(this._cardSelectors.cardSelector)
+      .cloneNode(true);
+    return this._cardElement;
+  }
 
+  // Навешивание слушателей
+  _setEventListeners() {
+    this._imageElement.addEventListener('click', () => {
+      this._imageClickHandler(this._name, this._link);
+    });
+    this._likeButtonElement.addEventListener('click', () => {
+      this._likeClickHandler(this);
+    });
+    this._deleteButtonElement.addEventListener('click', () => {
+      this._deleteClickHandler(this);
+    });
+  }
 
-// Создание карточки
+  // Проверка наличия лайка пользователя
+  hasLikeFromUser() {
+    return this.likes.some((like) => like._id === this.userId);
+  }
 
-const createCard = (link, name, cardId, likes, ownerId) => {
-  const cardElement = cardTemplate.querySelector(cardSelectors.cardSelector).cloneNode(true);
-  const placeNameElement = cardElement.querySelector(cardSelectors.cardNameSelector);
-  const placeImageElement = cardElement.querySelector(cardSelectors.cardImageSelector);
-  const buttonLikeElement = cardElement.querySelector(buttonSelectors.buttonLikeSelector);
-  const buttonDeleteElement = cardElement.querySelector(buttonSelectors.buttonDeleteSelector);
+  // Отрисовка счетчика лайков
+  renderLikesData() {
+    if (this.hasLikeFromUser()) {
+      this._likeButtonElement.classList.add(this._cardSelectors.buttonLikeActiveClass);
+      this._likesCounter.textContent = this.likes.length;
+    } else {
+      this._likeButtonElement.classList.remove(this._cardSelectors.buttonLikeActiveClass);
+      this._likesCounter.textContent = this.likes.length;
+    }
+  }
 
-  placeImageElement.src = link;
-  placeImageElement.alt = name;
-  placeNameElement.textContent = name;
-  cardElement.setAttribute('data-id', `${cardId}`);
-  if(checkLikesData(likes)) toggleLikeStatus(buttonLikeElement);
-  if(ownerId !== myId) buttonDeleteElement.remove();
+  // Создание карточки
+  create() {
+    this._cardElement = this._getElement();
+    this._nameElement = this._cardElement.querySelector(this._cardSelectors.nameSelector);
+    this._imageElement = this._cardElement.querySelector(this._cardSelectors.imageSelector);
+    this._likeButtonElement = this._cardElement.querySelector(this._cardSelectors.buttonLikeSelector);
+    this._deleteButtonElement = this._cardElement.querySelector(this._cardSelectors.buttonDeleteSelector);
+    this._likesCounter = this._cardElement.querySelector(this._cardSelectors.likesCounterSelector);
 
-  placeImageElement.addEventListener('click', createPopupShowImage);
-  renderLikesCounter(cardElement, likes);
-  return cardElement;
-}
+    this._imageElement.src = this._link;
+    this._imageElement.alt = this._name;
+    this._nameElement.textContent = this._name;
 
-// Добавление блока "Нет добавленных карточек"
-const renderNoCards = () => {
-  noCards.classList.remove(cardSelectors.noCardsHiddenClass);
-}
+    if (this._ownerId !== this.userId) this._deleteButtonElement.remove();
+    this.renderLikesData();
+    this._setEventListeners();
 
-// Проверка статуса лайка
-const checkLikeStatus = (buttonElement) => {
-  return buttonElement.classList.contains(buttonSelectors.buttonLikeActiveClass);
-}
+    return this._cardElement;
+  }
 
-// Переключение состояния кнопки лайка
-const toggleLikeStatus = (buttonElement) => {
-  buttonElement.classList.toggle(buttonSelectors.buttonLikeActiveClass);
-}
-
-// Отрисовка счетчика лайков
-const renderLikesCounter = (cardElement, likes) => {
-  const likesCounterElement = cardElement.querySelector(cardSelectors.likesCounterSelector);
-  likesCounterElement.textContent = likes.length;
-}
-
-// Проверка наличия моих лайков
-const checkLikesData = (likes) => {
-  return likes.some((like) => {
-    return like._id === myId;
-  });
-}
-
-
-export {
-  createCard,
-  renderNoCards,
-  checkLikeStatus,
-  toggleLikeStatus,
-  renderLikesCounter,
+  // Удаление карточки
+  delete() {
+    this._cardElement.remove();
+    this._cardElement = null;
+  }
 }
