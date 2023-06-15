@@ -47,21 +47,21 @@ const popupEditProfile = new PopupWithForm(
   popupSelectors,
   pageSelectors,
   formSelectors,
-  handleProfileFormSubmit
+  handleFormProfileSubmit
 );
 const popupChangeAvatar = new PopupWithForm(
   popupSelectors.popupChangeAvatar,
   popupSelectors,
   pageSelectors,
   formSelectors,
-  handleAvatarFormSubmit
+  handleFormAvatarSubmit
 );
 const popupAddCard = new PopupWithForm(
   popupSelectors.popupAddCard,
   popupSelectors,
   pageSelectors,
   formSelectors,
-  handleCardFormSubmit
+  handleFormCardSubmit
 );
 const popupShowImage = new PopupWithImage(
   popupSelectors.popupShowImage,
@@ -73,19 +73,19 @@ const popupConfirmDeletion = new PopupWithConfirm(
   popupSelectors,
   pageSelectors,
   formSelectors,
-  handleConfirmFormSubmit
+  handleFormConfirmSubmit
 );
 
 const userInfo = new UserInfo(profileSelectors);
 
 // Обработчик открытия модального окна
-const handlePopupOpening = (popup, formValidator) => {
-  if (popup === popupEditProfile) {
-    popup.setInputValues(userInfo.getUserInfo());
+function handlePopupOpening(popupObject, formValidatorObject) {
+  if (popupObject === popupEditProfile) {
+    popupObject.setInputValues(userInfo.getUserInfo());
   };
 
-  formValidator.resetValidation();
-  popup.open();
+  formValidatorObject.resetValidation();
+  popupObject.open();
 }
 
 // Слушатели события click для кнопок открытия модальных окон
@@ -106,7 +106,7 @@ buttons.changeAvatar.addEventListener('click', () => {
 const api = new Api(config);
 
 // Обработчик события submit формы редактирования профиля
-function handleProfileFormSubmit (inputValues) {
+function handleFormProfileSubmit (inputValues) {
   renderLoading(
     true,
     forms.editProfile,
@@ -133,7 +133,7 @@ function handleProfileFormSubmit (inputValues) {
 }
 
 // Обработчик события submit формы редактирования аватара
-function handleAvatarFormSubmit(avatar) {
+function handleFormAvatarSubmit(avatarLink) {
   renderLoading(
     true,
     forms.changeAvatar,
@@ -141,7 +141,7 @@ function handleAvatarFormSubmit(avatar) {
     submitValues.save
   );
 
-  api.patchAvatarData(avatar)
+  api.patchAvatarData(avatarLink)
     .then((profileData) => {
       userInfo.setAvatar(profileData);
       popupChangeAvatar.close();
@@ -162,28 +162,64 @@ function handleAvatarFormSubmit(avatar) {
 
 // ФУНКЦИОНАЛЬНОСТЬ КАРТОЧЕК
 
+// Обработчик события click для картинки (открытие попапа просмотра картинки)
+function handleClickOnImage(name, link) {
+  popupShowImage.open(name, link);
+}
+
+// Обработчик события click для кнопки лайка
+function handleClickOnLike(cardObject) {
+  const cardId = cardObject.getCardId();
+  if (cardObject.hasLikeFromUser()) {
+    api.deleteLikeData(cardId)
+    .then((cardData) => {
+      cardObject.updateLikes(cardData.likes);
+      cardObject.renderLikes();
+    })
+    .catch((err) => {
+    console.log(`Ошибка: ${err}`);
+    });
+  } else {
+    api.putLikeData(cardId)
+    .then((cardData) => {
+      cardObject.updateLikes(cardData.likes);
+      cardObject.renderLikes();
+    })
+    .catch((err) => {
+    console.log(`Ошибка: ${err}`);
+    });
+  }
+}
+
+// Обработчик события click для кнопки удаления карточки
+function handleClickOnDelete(cardObject) {
+  popupConfirmDeletion.setItemForDeletion(cardObject);
+  popupConfirmDeletion.open();
+}
+
+// Создание экземпляра класса Section для галлереи карточек
+const gallery = new Section(
+  gallerySelectors.cardsContainer,
+  renderCard,
+  gallerySelectors.noCardsHiddenClass);
+
 // Функция-коллбэк для создания экземпляра класса Card и получения готовой карточки
-const renderCard = (cardData) => {
+function renderCard(cardData) {
   const card = new Card(
     cardData,
     userInfo.id,
     templateSelectors.defaultCardSelector,
     cardSelectors,
-    handleImageClick,
-    handleLikeClick,
-    handleDeleteClick,
-  );
-  const сardElement = card.create();
-  gallery.addItem(сardElement);
-};
-
-const gallery = new Section(
-  gallerySelectors.cardsContainer,
-  gallerySelectors.noCardsHiddenClass,
-  renderCard);
+    handleClickOnImage,
+    handleClickOnLike,
+    handleClickOnDelete,
+  )
+  .create();
+  gallery.addItem(card, 'prepend');
+}
 
 // Обработчик события submit формы добавления карточки
-function handleCardFormSubmit(inputValues) {
+function handleFormCardSubmit(inputValues) {
   renderLoading(
     true,
     forms.addCard,
@@ -192,8 +228,8 @@ function handleCardFormSubmit(inputValues) {
   );
 
   api.postCardData(inputValues)
-    .then((data) => {
-      renderCard(data);
+    .then((cardData) => {
+      renderCard(cardData);
       popupAddCard.close();
     })
     .catch((err) => {
@@ -209,37 +245,8 @@ function handleCardFormSubmit(inputValues) {
     });
 }
 
-// Обработчик события click для кнопки лайка
-function handleLikeClick(card) {
-  if (card.hasLikeFromUser()) {
-    api.deleteLikeData(card.id)
-    .then((cardData) => {
-      card.likes = cardData.likes;
-      card.renderLikesData();
-    })
-    .catch((err) => {
-    console.log(`Ошибка: ${err}`);
-    });
-  } else {
-    api.putLikeData(card.id)
-    .then((cardData) => {
-      card.likes = cardData.likes;
-      card.renderLikesData();
-    })
-    .catch((err) => {
-    console.log(`Ошибка: ${err}`);
-    });
-  }
-}
-
-// Обработчик события click для кнопки удаления карточки
-const handleDeleteClick = (card) => {
-  popupConfirmDeletion.open();
-  popupConfirmDeletion.getId(card);
-};
-
 // Обработчик события submit для формы удаления карточки
-function handleConfirmFormSubmit(cardId) {
+function handleFormConfirmSubmit(cardObject) {
   renderLoading(
     true,
     forms.confirmDeletion,
@@ -247,9 +254,11 @@ function handleConfirmFormSubmit(cardId) {
     submitValues.yes
   );
 
+  const cardId = cardObject.getCardId();
+
   api.deleteCardData(cardId)
     .then(() => {
-      popupConfirmDeletion.element.delete();
+      cardObject.delete();
       gallery.renderNoItems();
       popupConfirmDeletion.close();
     })
@@ -266,17 +275,12 @@ function handleConfirmFormSubmit(cardId) {
     });
 }
 
-// Обработчик события click для картинки (открытие попапа просмотра картинки)
-const handleImageClick = (name, link) => {
-  popupShowImage.open(name, link);
-}
-
 
 // ОБЩАЯ ФУНКЦИОНАЛЬНОСТЬ
 
 // Загрузка и отрисовка исходных данных с сервера
-const getData = () => {
-  const data = Promise.all([api.getUserData(), api.getCardsData()])
+function setInitialData() {
+  Promise.all([api.getUserData(), api.getCardsData()])
   .then(([ profileData, cardsData ]) => {
     userInfo.setUserInfo(profileData);
     userInfo.setAvatar(profileData);
@@ -289,4 +293,4 @@ const getData = () => {
   });
 }
 
-getData();
+setInitialData();
