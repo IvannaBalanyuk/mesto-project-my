@@ -78,25 +78,23 @@ const popupConfirmDeletion = new PopupWithConfirm(
 
 const userInfo = new UserInfo(profileSelectors);
 
-// Обработчик открытия модального окна
-function handlePopupOpening(popupObject, formValidatorObject) {
-  if (popupObject === popupEditProfile) {
-    popupObject.setInputValues(userInfo.getUserInfo());
-  };
-
-  formValidatorObject.resetValidation();
-  popupObject.open();
-}
-
-// Слушатели события click для кнопок открытия модальных окон
+// Слушатель события click для кнопки открытия модального окна добавления карточки
 buttons.addCard.addEventListener('click', () => {
-  handlePopupOpening(popupAddCard, formCardValidator);
+  formCardValidator.resetValidation();
+  popupAddCard.open();
 });
+
+// Слушатель события click для кнопки открытия модального окна редактирования профиля
 buttons.editProfile.addEventListener('click', () => {
-  handlePopupOpening(popupEditProfile, formProfileValidator);
+  popupEditProfile.setInputValues(userInfo.getUserInfo());
+  formProfileValidator.resetValidation();
+  popupEditProfile.open();
 });
+
+// Слушатель события click для кнопки открытия модального окна редактирования аватара
 buttons.changeAvatar.addEventListener('click', () => {
-  handlePopupOpening(popupChangeAvatar, formAvatarValidator);
+  formAvatarValidator.resetValidation();
+  popupChangeAvatar.open();
 });
 
 
@@ -106,7 +104,7 @@ buttons.changeAvatar.addEventListener('click', () => {
 const api = new Api(config);
 
 // Обработчик события submit формы редактирования профиля
-function handleFormProfileSubmit (inputValues) {
+function handleFormProfileSubmit(inputValues) {
   renderLoading(
     true,
     forms.editProfile,

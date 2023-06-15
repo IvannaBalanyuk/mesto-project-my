@@ -28,7 +28,7 @@ export default class Api {
     });
   }
 
-  patchUserData([ name, about ]) {
+  patchUserData({ name, about }) {
     return fetch(`${this._baseUrl}/users/me`, {
       method: 'PATCH',
       headers: this._headers,
@@ -42,12 +42,12 @@ export default class Api {
     });
   }
 
-  patchAvatarData([ link ]) {
+  patchAvatarData({ avatar }) {
     return fetch(`${this._baseUrl}/users/me/avatar`, {
       method: 'PATCH',
       headers: this._headers,
       body: JSON.stringify({
-        avatar: link,
+        avatar: avatar,
       })
     })
     .then((res) => {
@@ -55,13 +55,13 @@ export default class Api {
     });
   }
 
-  postCardData([ cardName, cardLink ]) {
+  postCardData({ name, link }) {
     return fetch(`${ this._baseUrl }/cards`, {
       method: 'POST',
       headers: this._headers,
       body: JSON.stringify({
-        name: cardName,
-        link: cardLink,
+        name: name,
+        link: link,
       })
     })
     .then((res) => {
