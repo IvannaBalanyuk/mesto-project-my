@@ -15,14 +15,13 @@ export default class PopupWithConfirm extends Popup {
 
 	}
 
-  getId(element) {
-    this.element = element;
-    this._id = element.id;
+  setItemForDeletion(item) {
+    this._item = item;
   }
 
   _handleClickConfirm(evt) {
     evt.preventDefault();
-    this._actionConfirmHandler(this._id);
+    this._actionConfirmHandler(this._item);
   }
 
   open() {
