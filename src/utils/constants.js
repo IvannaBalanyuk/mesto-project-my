@@ -1,6 +1,6 @@
 // Конфиг для формирования запросов
 export const config = {
-  baseUrl: "http://mesto.domain.students.nomoredomainswork.ru",
+  baseUrl: "http://api.mesto.domain.students.nomoredomainswork.ru",
   headers: {
     authorization: "53e7280d-81b7-4e82-b5c1-fc2456f5c412",
     "Content-Type": "application/json",

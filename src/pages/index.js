@@ -16,8 +16,8 @@ import {
 
 import { renderLoading } from '../utils/utils.js';
 
-import Api from '../components/Api.js';
-import Card from '../components/Card.js';
+import Api from '../components/api.js';
+import Card from '../components/card.js';
 import FormValidator from '../components/FormValidator.js';
 import Section from '../components/Section.js';
 import PopupWithImage from '../components/PopupWithImage.js';
