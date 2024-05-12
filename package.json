@@ -7,7 +7,8 @@
     "build": "webpack --mode production",
     "dev": "webpack serve",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d dist"
+    "deploy:ghpages": "gh-pages -d dist",
+    "deploy:server": "npm run build && scp -Сr ./dist/* ivannabalanyuk@158.160.163.127:/home/ivannabalanyuk/mesto-frontend"
   },
   "repository": {
     "type": "git",
